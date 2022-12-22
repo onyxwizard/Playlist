@@ -12,13 +12,14 @@
 
 </head>
 <body>
+  <!--HTML NAV BAR TEMPLATE FROM getfreepictures -->
     <video autoplay muted loop id="bg-video">
         <source src="video/timelapse.mp4" type="video/mp4">
     </video>
     <div class="page-container">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-xs-12">
+          {{-- <div class="col-xs-12"> --}}
             <div class="cd-slider-nav">
               <nav class="navbar navbar-expand-lg" id="tm-nav">
                 <a class="navbar-brand" href="#">Music</a>
@@ -47,7 +48,7 @@
                   </div>
               </nav>
             </div>
-          </div>          
+          {{-- </div>           --}}
         </div>        
       </div>      
       <div class="container-fluid tm-content-container">
@@ -213,10 +214,10 @@
                   <p class="mb-4">
                     Coming soon!
                   </p>
-                  {{-- <div>
+                  <div>
                     Email: <a href="mailto:info@company.com" class="tm-link-white">info@company.com</a>
-                  </div> --}}
-                  <div class="tm-mb-45">
+                  </div>
+                   <div class="tm-mb-45">
                     Tel: <a href="tel:07896543219" class="tm-link-white">789-654-3219</a>
                   </div>
                   <!-- Map -->
@@ -244,14 +245,14 @@
       </footer>
     </div>
   </div>
-  <div id="loader-wrapper">            
+  {{-- <div id="loader-wrapper">            
     <div id="loader"></div>
     <div class="loader-section section-left"></div>
     <div class="loader-section section-right"></div>
-  </div>  
-  <script src="js/jquery-3.5.1.min.js"></script>
+  </div> 
+   <script src="js/jquery-3.5.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/slick.js"></script>
-  <script src="js/templatemo-script.js"></script>
+  <script src="js/templatemo-script.js"></script> --}}
 </body>
 </html>
