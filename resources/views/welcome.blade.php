@@ -143,7 +143,7 @@
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
-                        <a href="{{ url('/main') }}" class="text-sm text-black-700 underline">Main</a>
+                        <a href="{{ url('/main') }}" class="text-arial text-indigo-800 ">Main</a>
                     @else
                         <a href="{{ route('login') }}" class="text-arial text-indigo-800 ">Log in</a>
       
@@ -161,7 +161,6 @@
             
                 <!-- section within header for result-->
                 
-                <div id="rt"></div><br>
                 <header>  
                     <h2 >Trending Songs</h2>             
                 <section>

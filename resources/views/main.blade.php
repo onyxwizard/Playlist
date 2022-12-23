@@ -8,8 +8,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Playlist</title>
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
         
-       
+
         <!-- Theme lib -->
             <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
             <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -31,10 +32,10 @@
         <style>
             body{
                 
-                background:#b32d00;
+                background:#1f1e1e;
                 font-size:16px;
                 height:auto;
-                background-image: linear-gradient(#b32d00, black);
+                background-image: linear-gradient(black,#b30000);
                 
             }
 
@@ -42,11 +43,11 @@
                     
                     background:black;
                     color:white;
-                    width:60%;
-                    margin:20px auto;
+                    width:90%;
+                    margin:35px auto;
                     overflow:auto;
                     padding:30px;
-                    font-size:16px;
+                    font-size:20px;
                     font-family:Arial, Helvetica, sans-serif;
             }
 
@@ -118,121 +119,119 @@
             .text-indigo-800{
                 color: #00ffd5;
             }
-            .tt{
-                text-align: right;
+          
+           
+            .lt {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: rgb(8, 8, 8);
+            }
+
+            .tt {
+            float: left;
+            }
+
+            .tt a {
+            display: block;
+            color: rgb(236, 233, 247);
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            }
+
+            .tt a:hover:not(.trigger) {
+            background-color: rgb(255, 7, 7);
+            }
+
+            .trigger {
+            background-color: #b700ff;
+            }
+
+            .trigger:hover{
+                background-color: #0f0f0f;
+            }
+            .pagination {
+            display: inline-block;
+            }
+
+            .pagination a {
+            color: rgb(245, 233, 233);
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            margin: 0 4px;
+            transition: background-color .3s;
+            }
+
+            .pagination a.active {
+            background-color: #00ff08;
+            color: white;
+            border: 1px solid #4CAF50;
+            }
+
+            .pagination a:hover:not(.active) {background-color: #ff0000;}
+
+            .pagination a:first-child {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            }
+
+            .pagination a:last-child {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
             }
         </style>
         <script>
-            ck = new CK(
-            {
-                animateClass: 'animated',
-                offset: 100,
-                callback:     function(box) {
-                console.log("CK: animating <" + box.tagName.toLowerCase() + ">")
-                }
-            }
-            );
-            ck.init();
-            document.getElementById('moar').onclick = function() {
-            var section = document.createElement('section');
-            section.className = 'section--purple ck fadeInDown';
-            this.parentNode.insertBefore(section, this);
-            };
+          
             
     </script>
     </head>
                        
     <body>
-        <div>
-          
-            <div id="container">
-                <!-- header tag --> 
-             <!-- section within header for result-->
-             <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                <a href="{{ url('/home') }}" class="text-sm text-black-700 underline">Home</a>
-                <a href="{{ route('profile.edit')  }}"class="ml-4 text-arial text-indigo-800 ">Profile</a>
-                <a href="{{ route('logout') }}"class="ml-4 text-arial text-indigo-800 ">Logout</a>
+        <nav>
+        <ul class="lt">
+            <li class="tt"><a href="{{ url('/') }}">Home</a></li>
+            <li class="tt"><a href="#news">News</a></li>
+            <li class="tt"><a href="#contact">Contact</a></li>
+            <li class="tt"><a href="{{ route('profile.edit')}}">Profile</a></li>
+            <li class="tt" style="float:right"><a class="trigger" href="{{ route('logout') }}"class="ml-4 text-arial text-indigo-800 ">Logout</a></li>
+        </ul>
+        </nav>
+         <div id="container">
+
+                
                 {{-- {{ __('Profile') }} --}}
 
-            </div>
-            <div id="rt"></div><br>
-
-                <a href="{{ url('/') }}"><h1>Music Albums</h1></a>
+            
+        
+            <a href="{{ url('/') }}"><h1>Music Albums</h1></a>
                 
             
                 <!-- section within header for result-->
                 
-                <div id="rt"></div><br>
                 <header>  
                     <h2 >Trending Songs</h2>             
-                <section>
-                    <div id="slider-animation" class="carousel slide" data-ride="carousel">
-                
-                  <!-- Indicators -->
-                  <ul class="carousel-indicators">
-                    <li data-target="#slider-animation" data-slide-to="0" class="active"></li>
-                    <li data-target="#slider-animation" data-slide-to="1"></li>
-                    <li data-target="#slider-animation" data-slide-to="2"></li>
-                    <li data-target="#slider-animation" data-slide-to="3"></li>
-                  </ul>
-                
-                  <!-- The slideshow -->
-                  <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <a href="{{ url('/login') }}">
-                      <img src="https://images.hdqwalls.com/download/cyberpunk-colorful-ai-art-5k-0u-1280x720.jpg" alt="Los Angeles">
-                        <div class="text-box">
-                            <h2 class="wow slideInRight" data-wow-duration="1s">PASSION - Positive Lounge Chillout Music</h2>
-                            <p class="wow slideInLeft" data-wow-duration="1s">by Oleg Mazur</p>
-                        </div>
-                    </a>
-                    </div>
-                    <div class="carousel-item">
-                        <a href="{{ url('/login') }}">
-                      <img src="https://images.hdqwalls.com/download/abstract-color-wind-5b-1280x720.jpg" alt="Chicago">
-                      
-                    <div class="text-box">
-                            <h2 class="wow slideInUp" data-wow-duration="1s" >Christmas Background Music</h2>
-                            <p class="wow fadeInDown" data-wow-duration="1s"> </p>by Oleg Mazur</div>
-                    </a>
-                    </div>
-                    <div class="carousel-item">
-                        <a href="{{ url('/login') }}">
-                      <img src="https://images.hdqwalls.com/download/abstract-bangles-4k-7c-1280x720.jpg" alt="New York">
-                    <div class="text-box">
-                            <h2 class="wow fadeInUp" data-wow-duration="1s">Lo-Fi Chill Music - Lofi Music for Work / Study / Relax</h2>
-                            <p class="wow fadeInUp" data-wow-duration="1s">by Oleg Mazur</p>
-                        </div>
-                    </a>
-                    </div>
 
-                    <div class="carousel-item">
-                        <a href="{{ url('/login') }}">
-                      <img src="https://images.hdqwalls.com/download/lightning-abstract-art-4k-4v-1280x720.jpg" alt="York">
-                    <div class="text-box">
-                            <h2 class="wow fadeInUp" data-wow-duration="1s">HAPPY LUCKY JOYFUL MUSIC | Background Uplifting Music for Positive Mood and Inspiration</h2>
-                            <p class="wow fadeInUp" data-wow-duration="1s">by Oleg Mazur</p>
-                        </div>
-                    </a>
-                    </div>
-                  </div>
-                
-                  <!-- Left and right controls -->
-                  <a class="carousel-control-prev" href="#slider-animation" data-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                  </a>
-                  <a class="carousel-control-next" href="#slider-animation" data-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                  </a>
-                
-                </div>
-                    
-                </section>
 
             </header>
                 <div id="rt"></div><br>
                 <footer>
-                    <p><center><strong>COPYRIGHTS RESERVED 2023 |  AK</strong></center></p>
+                   
+                    <nav aria-label="...">
+                        <div class="pagination">
+                            <a href="#">&laquo;</a>
+                            <a class="active" href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#">4</a>
+                            <a href="#">5</a>
+                            <a href="#">6</a>
+                            <a href="#">&raquo;</a>
+                          </div>
+                      </nav>
                 </footer>
                 </div>
     </body>
