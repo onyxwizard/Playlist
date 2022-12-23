@@ -118,6 +118,9 @@
             .text-indigo-800{
                 color: #00ffd5;
             }
+            .tt{
+                text-align: right;
+            }
         </style>
         <script>
             ck = new CK(
@@ -138,24 +141,22 @@
             
     </script>
     </head>
+                       
     <body>
         <div>
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/main') }}" class="text-sm text-black-700 underline">Main</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-arial text-indigo-800 ">Log in</a>
-      
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-arial text-indigo-800 ">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+          
             <div id="container">
                 <!-- header tag --> 
-            
+             <!-- section within header for result-->
+             <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                <a href="{{ url('/home') }}" class="text-sm text-black-700 underline">Home</a>
+                <a href="{{ route('profile.edit')  }}"class="ml-4 text-arial text-indigo-800 ">Profile</a>
+                <a href="{{ route('logout') }}"class="ml-4 text-arial text-indigo-800 ">Logout</a>
+                {{-- {{ __('Profile') }} --}}
+
+            </div>
+            <div id="rt"></div><br>
+
                 <a href="{{ url('/') }}"><h1>Music Albums</h1></a>
                 
             
@@ -236,3 +237,6 @@
                 </div>
     </body>
 </html>
+
+                
+                    

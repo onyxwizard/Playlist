@@ -18,8 +18,29 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/logout',function () {
+    return view('welcome');
+});
+
+
+Route::get('/main',function () {
+    auth()->authenticate();
+    return view('main');
+});
+
+Route::get('/home',function () {
+    auth()->authenticate();
+    return view('welcome');
+});
+
+Route::get('logout', function (){
+    auth()->logout();
+    Session()->flush();
+    return Redirect::to('/');
+})->name('logout');
+
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('main');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
