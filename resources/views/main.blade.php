@@ -144,6 +144,10 @@
             .tt a:hover:not(.trigger) {
             background-color: rgb(255, 7, 7);
             }
+            .st{
+                color: white;
+               
+            }
 
             .trigger {
             background-color: #b700ff;
@@ -198,6 +202,7 @@
             <li class="tt"><a href="#contact">Contact</a></li>
             <li class="tt"><a href="{{ route('profile.edit')}}">Profile</a></li>
             <li class="tt" style="float:right"><a class="trigger" href="{{ route('logout') }}"class="ml-4 text-arial text-indigo-800 ">Logout</a></li>
+            <li class="st" style="float:right"> Logged In as : {{ Auth::user()->name }}</li>
         </ul>
         </nav>
          <div id="container">
@@ -215,6 +220,7 @@
                 <header>  
                     <h2 >Trending Songs</h2>             
 
+  <!-- Post section -->
 
             </header>
                 <div id="rt"></div><br>

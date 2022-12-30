@@ -1,3 +1,14 @@
+<title> User Registeration Page </title>
+<style>
+    div{
+        
+        
+        font-size:16px;
+        height:auto;
+        background-image: linear-gradient(#b32d00, black);
+        
+    }
+    </style>
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf

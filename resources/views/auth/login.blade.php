@@ -1,15 +1,26 @@
+<title> User Login Page </title>
 <style>
     body{
         
-        background:#b32d00;
+        
+        font-size:16px;
+        height:auto;
+        background-image: linear-gradient(#b32d00, black);
+        
+    }
+    div{
+        
+        
         font-size:16px;
         height:auto;
         background-image: linear-gradient(#b32d00, black);
         
     }
     </style>
-<x-guest-layout>
     <body>
+<x-guest-layout>
+    
+    
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -55,6 +66,7 @@
             </x-primary-button>
         </div>
     </form>
-    </body>
-</x-guest-layout>
+    
+</x-guest-layout> 
+</body>
 

@@ -24,14 +24,14 @@ Route::get('/logout',function () {
 
 
 Route::get('/main',function () {
-    auth()->authenticate();
-    return view('main');
-});
+    // auth()->authenticate();
+     return view('main');
+})->middleware(['auth','verified']);
 
 Route::get('/home',function () {
-    auth()->authenticate();
+    // auth()->authenticate();
     return view('welcome');
-});
+})->middleware(['auth','verified']);
 
 Route::get('logout', function (){
     auth()->logout();
@@ -39,8 +39,12 @@ Route::get('logout', function (){
     return Redirect::to('/');
 })->name('logout');
 
-Route::get('/dashboard', function () {
+Route::get('/login', function (){
     return view('main');
+})->middleware(['auth']);;
+
+Route::get('/dashboard', function () {
+    return view('/main');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

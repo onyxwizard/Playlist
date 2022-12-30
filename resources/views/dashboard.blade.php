@@ -1,3 +1,27 @@
+<title>User Dashboard</title>
+<style>
+    div{
+         
+        font-size:16px;
+        height:auto;
+        background-image: linear-gradient(#02ffab, black);
+        
+    }
+    .header{
+        font-size:16px;
+        height:auto;
+        background-image: linear-gradient(#0751db, black);
+        color: aqua;
+
+    }
+    .h2{
+        font-size:16px;
+        height:auto;
+        background-image: linear-gradient(#dbbb07, black);
+        color: aqua;
+
+    }
+    </style>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
