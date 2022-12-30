@@ -47,6 +47,11 @@ Route::get('/dashboard', function () {
     return view('/main');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/upload',function () {
+    // auth()->authenticate();
+     return view('upload');
+})->middleware(['auth']);
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

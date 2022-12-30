@@ -201,6 +201,7 @@
             <li class="tt"><a href="#news">News</a></li>
             <li class="tt"><a href="#contact">Contact</a></li>
             <li class="tt"><a href="{{ route('profile.edit')}}">Profile</a></li>
+            <li class="tt"><a href="{{ url('/upload')}}">Post</a></li>
             <li class="tt" style="float:right"><a class="trigger" href="{{ route('logout') }}"class="ml-4 text-arial text-indigo-800 ">Logout</a></li>
             <li class="st" style="float:right"> Logged In as : {{ Auth::user()->name }}</li>
         </ul>
