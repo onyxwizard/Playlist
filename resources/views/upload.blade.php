@@ -1,16 +1,7 @@
-
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Post Song</title>
-    </head>
-    <style>
-        .file-area {
+<html>
+<title>Upload</title>
+<style>
+.file-area {
   width: 100%;
   position: relative;
   
@@ -26,7 +17,7 @@
     cursor: pointer;
   }
   
-  .file-dummy {
+  .test-file {
     width: 100%;
     padding: 30px;
     background: rgba(255,255,255,0.2);
@@ -39,20 +30,20 @@
     }
   }
   
-  &:hover .file-dummy {
+  &:hover .test-file {
     background: rgba(255,255,255,0.1);
   }
   
-  input[type=file]:focus + .file-dummy {
+  input[type=file]:focus + .test-file {
     outline: 2px solid rgba(255,255,255,0.5);
     outline: -webkit-focus-ring-color auto 5px;
   }
   
-  input[type=file]:valid + .file-dummy {
+  input[type=file]:valid + .test-file {
     border-color: rgba(0,255,0,0.4);
     background-color: rgba(0,255,0,0.3);
 
-    .success {
+    .done {
       display: inline-block;
     }
     .default {
@@ -61,41 +52,157 @@
   }
 }
 
-    </style>
-        <body>
-        <form action method="post">
+* {
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-weight: 300;
+  height: 100%;
+  background: #a80404;
+  color: #fff;
+  font-size: 16px;
+  overflow: hidden;
+  background: -moz-linear-gradient(top, #dd0800 0%, #00659b 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #dd0800), color-stop(100%, #00659b));
+  background: -webkit-linear-gradient(top, #dd0800 0%, #00659b 100%);
+  background: -o-linear-gradient(top, #dd0800 0%, #00659b 100%);
+  background: -ms-linear-gradient(top, #dd0800 0%, #00659b 100%);
+  background: linear-gradient(to bottom, #dd0800 0%, #00659b 100%);
   
-            <h1><strong>File upload</strong> with style and pure CSS</h1>
-            
-            <div class="form-group">
-              <label for="title">Title <span>Use title case to get a better result</span></label>
-              <input type="text" name="title" id="title" class="form-controll"/>
-            </div>
-            <div class="form-group">
-              <label for="caption">Caption <span>This caption should be descriptiv</span></label>
-              <input type="text" name="caption" id="caption" class="form-controll"/>
-            </div>
-            
-            <div class="form-group file-area">
-                  <label for="images">Images <span>Your images should be at least 400x300 wide</span></label>
-              <input type="file" name="images" id="images" required="required" multiple="multiple"/>
-              <div class="file-dummy">
-                <div class="success">Great, your files are selected. Keep on.</div>
-                <div class="default">Please select some files</div>
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <button type="submit">Upload images</button>
-            </div>
-            
-          </form>
-         
-          
-          <link href='https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700' rel='stylesheet' type='text/css'>
-          
-          <a href="http://scribblerockerz.com/drag-n-drop-file-input-without-javascript/" class="back-to-article" target="_blank">back to Article</a>
-    </body>
-      
-         
+}
+
+h1 {
+  text-align: center;
+  margin: 50px auto;
+  font-weight: 100;
+}
+
+label {
+  font-weight: 500;
+  display: block;
+  margin: 4px 0;
+  text-transform: uppercase;
+  font-size: 13px;
+  overflow: hidden;
+  
+  span {
+    float: right;
+    text-transform: none;
+    font-weight: 200;
+    line-height: 1em;
+    font-style: italic;
+    opacity: 0.8;
+  }
+}
+
+.trigger {
+  display: block;
+  padding: 8px 16px;
+  width: 100%;
+  font-size: 16px;
+  background-color: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  font-weight: 200;
+  
+  &:focus {
+    outline: 2px solid rgba(255,255,255,0.5);
+    outline: -webkit-focus-ring-color auto 5px;
+  }
+}
+
+button {
+  padding: 8px 30px;
+  background: rgba(255,255,255,0.8);
+  color: #053777;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 11px;
+  border: 0;
+  text-shadow: 0 1px 2px #fff;
+  cursor: pointer;
+}
+
+.set-form {
+  max-width: 500px;
+  margin: auto;
+  margin-bottom: 30px;
+}
+.set-form1 {
+  max-width: 500px;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+.trigger1 {
+  display: block;
+  padding: 18px 16px;
+  width: 100%;
+  font-size: 16px;
+  background-color: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  font-weight: 200;
+  
+  &:focus {
+    outline: 2px solid rgba(255,255,255,0.5);
+    outline: -webkit-focus-ring-color auto 5px;
+  }
+}
+.return {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 12px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  text-decoration: none;
+  display: inline-block;
+  background: rgba(0,0,0,0.6);
+  padding: 10px 18px;
+  transition: all 0.3s ease-in-out;
+  opacity: 0.6;
+  
+  &:hover {
+    opacity: 1;
+    background: rgba(0,0,0,0.8);
+  }
+}
+  </style>
+<form action method="post">
+  
+  <h1><strong>Post a Song</strong> => Playlist</h1>
+  
+  <div class="set-form">
+    <label for="title">Title Track </label>
+    <input type="text" name="title" id="title" class="trigger"/>
+  </div>
+  <div class="set-form1">
+    <label for="msg">Description of the song  </label>
+    <textarea type="text" msg cols="30" rows="5" name="Message" id="msg" class="trigger1"/></textarea>   
+  </div>
+  
+  <div class="set-form file-area">
+        <label for="images">Picture <span>Choose any resolution but size needs to be below 5MB</span></label>
+    <input type="file" name="images" id="images" required="required" multiple="multiple"/>
+    {{-- <div class="test-file">
+      <div class="done">Uploaded successfully</div>
+      <div class="default">Please select some files</div>
+    </div> --}}
+  </div>
+  
+  <div class="set-form">
+    <button type="submit">Upload images</button>
+  </div>
+  
+</form>
+
+
+<a href="{{ url('/main')}}" class="return" >Main</a>
+
 </html>

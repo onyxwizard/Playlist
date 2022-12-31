@@ -134,16 +134,6 @@
     animation: btn-anim2 1s linear infinite;
     animation-delay: .25s
     }
-
-    @keyframes btn-anim2 {
-    0% {
-        top: -100%;
-    }
-    50%,100% {
-        top: 100%;
-    }
-    }
-
     .login-box a span:nth-child(3) {
     bottom: 0;
     right: -100%;
@@ -154,12 +144,12 @@
     animation-delay: .5s
     }
 
-    @keyframes btn-anim3 {
+    @keyframes btn-anim2 {
     0% {
-        right: -100%;
+        top: -100%;
     }
     50%,100% {
-        right: 100%;
+        top: 100%;
     }
     }
 
@@ -172,6 +162,17 @@
     animation: btn-anim4 1s linear infinite;
     animation-delay: .75s
     }
+
+    @keyframes btn-anim3 {
+    0% {
+        right: -100%;
+    }
+    50%,100% {
+        right: 100%;
+    }
+    }
+
+    
     .a{
     bottom: -100%;
     left: 0;
@@ -241,20 +242,24 @@
                     <span></span>
                     <span></span>
                     <span></span>
-                    <span></span>
+                    
                     {{ __('Forgot your password?') }}
                 </a>
             @endif
             
-            <x-primary-button id="a">
+            <br>
+            <br>
+            
             <a>
                 <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
+                <x-primary-button id="a">
                 {{ __('Log in') }}
-            </a>
             </x-primary-button>
+            </a>
+            
             
         </div>
     </form>
