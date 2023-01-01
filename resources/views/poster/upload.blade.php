@@ -173,7 +173,37 @@ button {
     background: rgba(0,0,0,0.8);
   }
 }
+          .dtbl {
+                width:90%;
+                height:100%;
+                border:2px dashed #69e2f8;
+                border-collapse:collapse;
+                padding:5px;
+            margin:35px auto;
+            overflow:auto;
+            }
+            .dtbl th {
+                border:2px dashed #ff0404;
+                padding:5px;
+                background: #000000;
+                color: #49b40b;
+            }
+            .dtbl td {
+                border:2px dashed #ff0404;
+                padding:5px;
+                background: #130d0d;
+                color: #70fd12;
+                
+            }
   </style>
+  <script type="text/javascript">
+    var x = document.getElementById('next'); 
+    //alert(x);
+    function playAudio() {
+    x.play(); 
+    } 
+    </script>
+    
 <form action="{{url('/post/')}}" method="post" enctype="multipart/form-data">
   {!! csrf_field() !!}
   <h1><strong>Post a Song</strong> => Playlist</h1>
@@ -203,12 +233,55 @@ button {
     <input type="file" accept="audio/*" name="audio" id="audio" required="required" multiple="multiple"/>
   </div>
   
-  <div class="set-form">
-    <button type="submit">Upload images</button>
-  </div>
-    
-</form>
-
+          <div class="set-form">
+      
+            <button type="submit">Upload images</button>
+          </div>
+            
+        </form>
+        
+        {{-- <table class="dtbl">
+          <thead>
+              <tr>
+                  <th>#</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Cover</th>
+                  <th>Audio</th>
+              </tr>
+          </thead>
+          <tbody>
+              @foreach($post_image as $item)
+              <tr>
+                  <td>{{$loop->iteration}}</td>
+                  <td>{{$item->title}}</td>
+                  <td>{{$item->message}}</td>
+                  <td>
+                      <img src="{{asset($item->pics)}}" width="50" height="50">
+                      </td>
+                      <td>  
+                          <audio controls>
+                          <source src="{{asset($item->audio)}}"> --}}
+                              {{-- <a class="btn btn-primary" id="next" href="/tmp/{{$item->audio}}" onclick="return playAudio();">Play</a> --}}
+                          {{-- </audio> --}}
+                          {{-- <embed src="{{asset($item->audio)}}" height="50" width="250"/> --}}
+                          {{-- <object data="{{asset($item->audio)}}" height="50" width="250">
+                          </object> --}}
+                      {{-- </td>
+              
+              </tr>
+              @endforeach
+              @if ($errors->any())
+                  <div class="alert alert-danger">
+                      <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                      </ul>
+                  </div>
+              @endif
+          </tbody>
+        </table> --}}
 
 <a href="{{ url('/main')}}" class="return" >Main</a>
 

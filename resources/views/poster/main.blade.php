@@ -58,6 +58,8 @@
                 padding:5px;
             }
 
+            
+
             h1{
                 text-align:left;
                 border:rgb(255, 0, 0) dashed 1.9px;
@@ -68,11 +70,14 @@
 
 
             footer{
-                text-align:center;
+                text-align:right;
                 border:rgb(255, 1, 1) dashed 1.9px;
                 color:#00ff00;
                 padding:5px;
+            
+                
             }
+            
 
             .submit{
                 transition-duration: 0.4s;
@@ -100,6 +105,7 @@
                 padding:10px;
                 margin:10px 0;
             }
+            
 
             #results span{
                 color:white;
@@ -187,14 +193,17 @@
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
             }
-            /* table {
+
+          
+            
+            table {
             width: 100%;
             }
             table, th, td {
             border: 1px solid rgb(231, 0, 0);
-            } */
+            }
 
-            .dtbl {
+             .dtbl {
 			width:90%;
 			height:100%;
 			border:2px dashed #69e2f8;
@@ -216,6 +225,8 @@
                 color: #70fd12;
                 
             }
+
+            
         </style>
 
 
@@ -288,10 +299,13 @@
                         <th>Title</th>
                         <th>Description</th>
                         <th>Cover</th>
-                        <th>Audio</th>
+                        {{-- <th>Audio</th> --}}
+                        {{-- <th>Posted By</th> --}}
+                        <th>Posted Author</th>
                     </tr>
                 </thead>
                 <tbody>
+                    
                     @foreach($post_image as $item)
                     <tr>
                         <td>{{$loop->iteration}}</td>
@@ -300,14 +314,25 @@
                         <td>
                             <img src="{{asset($item->pics)}}" width="50" height="50">
                             </td>
-                            <td>  
+                            {{-- <td>  
                                 <audio controls>
                                 <source src="{{asset($item->audio)}}">
-                                    {{-- <a class="btn btn-primary" id="next" href="/tmp/{{$item->audio}}" onclick="return playAudio();">Play</a> --}}
-                                </audio>
-                                {{-- <embed src="{{asset($item->audio)}}" height="50" width="250"/> --}}
-                                {{-- <object data="{{asset($item->audio)}}" height="50" width="250">
-                                </object> --}}
+                                    <a class="btn btn-primary" id="next" href="/tmp/{{$item->audio}}" onclick="return playAudio();">Play</a>
+                                </audio> 
+                                
+                             </td> --}}
+                             @if (Auth::check())
+                             {{-- <td> 
+                                
+                                {
+                                    {{ $item->post_id}} 
+                                }
+                            </td> --}}
+                            <td> 
+                                
+                                    {{$item->user_post_name}}, ID=> {{ $item->post_id}}
+                                
+                             @endif
                             </td>
                     
                     </tr>
@@ -323,22 +348,29 @@
                     @endif
                 </tbody>
             </table>
-
+           
+             
             <div id="rt"></div><br>
                 <footer>
-                   
-                    <nav aria-label="...">
+                    {{-- $id = {{$post_image->currentpage()}}; --}}
+                    {{-- <nav aria-label="...">
                         <div class="pagination">
-                            <a href="#">&laquo;</a>
-                            <a class="active" href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
+                            
+                            <a href="/main?page={{$post_image->currentpage()}}">&laquo;</a>
+                            <a class="active" href="/main?page={{$post_image->perpage()}}">1</a>
+                            {{-- <a href="/main?page=2">2</a>
+                            <a href="page=3">3</a>
+                            <a href="page=4">4</a>
                             <a href="#">5</a>
-                            <a href="#">6</a>
-                            <a href="#">&raquo;</a>
+                            <a href="#">6</a> --}}
+                            {{-- <a href="/main?page={{$post_image->lastpage()}}">&raquo;</a>
                           </div>
-                      </nav>
+                      </nav> --}}
+                
+                      <span class="foot">
+                        {{$post_image->links()}}
+                      </span>
+                      
                 </footer>
                 </div>
          </div>

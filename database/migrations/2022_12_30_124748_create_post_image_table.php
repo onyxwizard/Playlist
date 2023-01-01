@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('message');
             $table->string('pics',300);
             $table->string('audio',300);
+            $table->integer('post_id');
+            $table->string('user_post_name');
             $table->timestamps();
         });
     }

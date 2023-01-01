@@ -40,16 +40,26 @@ Route::get('logout', function (){
 })->name('logout');
 
 Route::get('/login', function (){
-    return view('main');
+    return view('poster.main');
 })->middleware(['auth']);;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Route::get('/main', function (){
+//     return view('poster.main');
+// })->middleware(['auth']);
+
+
 Route::resource("/post", PostImageController::class)->middleware(['auth']);
-// Route::resource("poster.upload", PostImageController::class)->middleware(['auth']);
 Route::resource("/main", PostImageController::class)->middleware(['auth']);
+Route::resource("/index", PostImageController::class)->middleware(['auth']);
+Route::resource("/upload", PostImageController::class)->middleware(['auth']);
+// Route::resource("poster.upload", PostImageController::class)->middleware(['auth']);
+Route::get('/index', function (){
+    return view('poster.index');
+})->middleware(['auth']);;
 // Route::get('/post',function () {
 //     // auth()->authenticate();
 //      return view('upload');

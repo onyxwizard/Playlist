@@ -22,7 +22,7 @@ class PostImageController extends Controller
      */
     public function index()
     {
-        $post_image = PostImage::all();
+        $post_image = PostImage::paginate(2);
         return view('poster.main')->with('post_image',$post_image);
     }
 
@@ -48,7 +48,8 @@ class PostImageController extends Controller
             'title' => 'required|max:15|min:2',
             'message' => 'required|max:500|min:2',
             'pics' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:5024|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
-            'audio' => 'nullable|mimes:audio/mpeg,mpga,mp3,wav,aac'
+            'audio' => 'nullable|mimes:audio/mpeg,mpga,mp3,wav,aac',
+            
         ]);
  
         if ($validator->fails()) {
@@ -62,6 +63,11 @@ class PostImageController extends Controller
         // $imagepath=url('/storage/upload/files/Images/'.$fName,'public');
         // $destinationPath = public_path().'/Images/' ;
         $requestDt['pics'] = $request->file('pics')->storeAs('/',$fName,'public');
+        $user_id = Auth::user()->getId();
+        $user_post_name = Auth::user()->getName();
+        $requestDt['post_id'] = $user_id;
+        $requestDt['user_post_name'] = $user_post_name;
+
         // $requestDt['pics'] = $PATH;
         PostImage::create($requestDt);
         // $Faudio = $request->file('audio')->getClientOriginalName();
@@ -78,7 +84,7 @@ class PostImageController extends Controller
             $all_audios=$audiopath;
            }
         
-        return redirect('post')->with('flash_message','Posted');
+        return redirect('/post')->with('flash_message','Posted');
     }
 
     /**
