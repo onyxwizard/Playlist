@@ -174,8 +174,8 @@ button {
   }
 }
   </style>
-<form action method="post">
-  
+<form action="{{url('/post/')}}" method="post" enctype="multipart/form-data">
+  {!! csrf_field() !!}
   <h1><strong>Post a Song</strong> => Playlist</h1>
   
   <div class="set-form">
@@ -184,22 +184,29 @@ button {
   </div>
   <div class="set-form1">
     <label for="msg">Description of the song  </label>
-    <textarea type="text" msg cols="30" rows="5" name="Message" id="msg" class="trigger1"/></textarea>   
+    <textarea type="text" msg cols="30" rows="5" name="message" id="message" class="trigger1"/></textarea>   
   </div>
   
   <div class="set-form file-area">
         <label for="images">Picture <span>Choose any resolution but size needs to be below 5MB</span></label>
-    <input type="file" name="images" id="images" required="required" multiple="multiple"/>
+    <input type="file" accept="image/*" name="pics" id="pics" required="required" multiple="multiple"/>
+
+
     {{-- <div class="test-file">
       <div class="done">Uploaded successfully</div>
       <div class="default">Please select some files</div>
     </div> --}}
   </div>
+
+  <div class="set-form file-area">
+    <label for="audio">Audio File <span>Choose a file size below 3MB</span></label>
+    <input type="file" accept="audio/*" name="audio" id="audio" required="required" multiple="multiple"/>
+  </div>
   
   <div class="set-form">
     <button type="submit">Upload images</button>
   </div>
-  
+    
 </form>
 
 

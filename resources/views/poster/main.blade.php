@@ -187,21 +187,55 @@
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
             }
+            /* table {
+            width: 100%;
+            }
+            table, th, td {
+            border: 1px solid rgb(231, 0, 0);
+            } */
+
+            .dtbl {
+			width:90%;
+			height:100%;
+			border:2px dashed #69e2f8;
+			border-collapse:collapse;
+			padding:5px;
+            margin:35px auto;
+            overflow:auto;
+            }
+            .dtbl th {
+                border:2px dashed #ff0404;
+                padding:5px;
+                background: #000000;
+                color: #49b40b;
+            }
+            .dtbl td {
+                border:2px dashed #ff0404;
+                padding:5px;
+                background: #130d0d;
+                color: #70fd12;
+                
+            }
         </style>
-        <script>
-          
+
+
+
+        <script type="text/javascript">
+        var x = document.getElementById('next'); 
+        //alert(x);
+        function playAudio() {
+        x.play(); 
+        } 
+        </script>
             
-    </script>
     </head>
                        
     <body>
         <nav>
         <ul class="lt">
             <li class="tt"><a href="{{ url('/') }}">Home</a></li>
-            <li class="tt"><a href="#news">News</a></li>
-            <li class="tt"><a href="#contact">Contact</a></li>
             <li class="tt"><a href="{{ route('profile.edit')}}">Profile</a></li>
-            <li class="tt"><a href="{{ url('/upload')}}">Post</a></li>
+            <li class="tt"><a href="{{ url('/post/create')}}">Post</a></li>
             <li class="tt" style="float:right"><a class="trigger" href="{{ route('logout') }}"class="ml-4 text-arial text-indigo-800 ">Logout</a></li>
             <li class="st" style="float:right"> Logged In as : {{ Auth::user()->name }}</li>
         </ul>
@@ -220,11 +254,77 @@
                 
                 <header>  
                     <h2 >Trending Songs</h2>             
-
-  <!-- Post section -->
-
             </header>
-                <div id="rt"></div><br>
+         
+            {{-- <div id="container">
+            
+            <table class="formtable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Cover</th>
+                    </thead>
+                </thead>
+                <tbody>
+                    @foreach($post_image as $item)
+                    <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$item->title}}</td>
+                        <td>{{$item->message}}</td>
+                        <td>
+                            <img src="{{asset($item->pics)}}" width="50" height="50">
+                            </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table> --}}
+
+            <table class="dtbl">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Cover</th>
+                        <th>Audio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($post_image as $item)
+                    <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$item->title}}</td>
+                        <td>{{$item->message}}</td>
+                        <td>
+                            <img src="{{asset($item->pics)}}" width="50" height="50">
+                            </td>
+                            <td>  
+                                <audio controls>
+                                <source src="{{asset($item->audio)}}">
+                                    {{-- <a class="btn btn-primary" id="next" href="/tmp/{{$item->audio}}" onclick="return playAudio();">Play</a> --}}
+                                </audio>
+                                {{-- <embed src="{{asset($item->audio)}}" height="50" width="250"/> --}}
+                                {{-- <object data="{{asset($item->audio)}}" height="50" width="250">
+                                </object> --}}
+                            </td>
+                    
+                    </tr>
+                    @endforeach
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                </tbody>
+            </table>
+
+            <div id="rt"></div><br>
                 <footer>
                    
                     <nav aria-label="...">
@@ -241,8 +341,10 @@
                       </nav>
                 </footer>
                 </div>
+         </div>
     </body>
+   
 </html>
 
                 
-                    
+

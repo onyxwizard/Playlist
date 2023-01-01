@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PostImageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,10 +23,10 @@ Route::get('/logout',function () {
 });
 
 
-Route::get('/main',function () {
-    // auth()->authenticate();
-     return view('main');
-})->middleware(['auth','verified']);
+// Route::get('/main',function () {
+//     // auth()->authenticate();
+//      return view('poster.main');
+// })->middleware(['auth','verified']);
 
 Route::get('/home',function () {
     // auth()->authenticate();
@@ -44,13 +44,16 @@ Route::get('/login', function (){
 })->middleware(['auth']);;
 
 Route::get('/dashboard', function () {
-    return view('/main');
+    return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/upload',function () {
-    // auth()->authenticate();
-     return view('upload');
-})->middleware(['auth']);
+Route::resource("/post", PostImageController::class)->middleware(['auth']);
+// Route::resource("poster.upload", PostImageController::class)->middleware(['auth']);
+Route::resource("/main", PostImageController::class)->middleware(['auth']);
+// Route::get('/post',function () {
+//     // auth()->authenticate();
+//      return view('upload');
+// })->middleware(['auth']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
