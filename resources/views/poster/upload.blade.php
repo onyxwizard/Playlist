@@ -49,160 +49,133 @@
     .default {
       display: none;
     }
+    }
   }
-}
 
-* {
-  box-sizing: border-box;
-  font-family: 'Lato', sans-serif;
-}
+  * {
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+  }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  font-weight: 300;
-  height: 100%;
-  background: #a80404;
-  color: #fff;
-  font-size: 16px;
-  overflow: hidden;
-  background: -moz-linear-gradient(top, #dd0800 0%, #00659b 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #dd0800), color-stop(100%, #00659b));
-  background: -webkit-linear-gradient(top, #dd0800 0%, #00659b 100%);
-  background: -o-linear-gradient(top, #dd0800 0%, #00659b 100%);
-  background: -ms-linear-gradient(top, #dd0800 0%, #00659b 100%);
-  background: linear-gradient(to bottom, #dd0800 0%, #00659b 100%);
-  
-}
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    font-weight: 300;
+    height: 100%;
+    background: #a80404;
+    color: #fff;
+    font-size: 16px;
+    overflow: hidden;
+    background: -moz-linear-gradient(top, #dd0800 0%, #00659b 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #dd0800), color-stop(100%, #00659b));
+    background: -webkit-linear-gradient(top, #dd0800 0%, #00659b 100%);
+    background: -o-linear-gradient(top, #dd0800 0%, #00659b 100%);
+    background: -ms-linear-gradient(top, #dd0800 0%, #00659b 100%);
+    background: linear-gradient(to bottom, #dd0800 0%, #00659b 100%);
+    
+  }
 
-h1 {
-  text-align: center;
-  margin: 50px auto;
-  font-weight: 100;
-}
+  h1 {
+    text-align: center;
+    margin: 50px auto;
+    font-weight: 100;
+  }
 
-label {
-  font-weight: 500;
-  display: block;
-  margin: 4px 0;
-  text-transform: uppercase;
-  font-size: 13px;
-  overflow: hidden;
-  
-  span {
-    float: right;
-    text-transform: none;
+  label {
+    font-weight: 500;
+    display: block;
+    margin: 4px 0;
+    text-transform: uppercase;
+    font-size: 13px;
+    overflow: hidden;
+    
+    span {
+      float: right;
+      text-transform: none;
+      font-weight: 200;
+      line-height: 1em;
+      font-style: italic;
+      opacity: 0.8;
+    }
+  }
+
+  .trigger {
+    display: block;
+    padding: 8px 16px;
+    width: 100%;
+    font-size: 16px;
+    background-color: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
     font-weight: 200;
-    line-height: 1em;
-    font-style: italic;
-    opacity: 0.8;
+    
+    &:focus {
+      outline: 2px solid rgba(255,255,255,0.5);
+      outline: -webkit-focus-ring-color auto 5px;
+    }
   }
-}
 
-.trigger {
-  display: block;
-  padding: 8px 16px;
-  width: 100%;
-  font-size: 16px;
-  background-color: rgba(255,255,255,0.2);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: #fff;
-  font-weight: 200;
-  
-  &:focus {
-    outline: 2px solid rgba(255,255,255,0.5);
-    outline: -webkit-focus-ring-color auto 5px;
+  button {
+    padding: 8px 30px;
+    background: rgba(255,255,255,0.8);
+    color: #053777;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 11px;
+    border: 0;
+    text-shadow: 0 1px 2px #fff;
+    cursor: pointer;
   }
-}
 
-button {
-  padding: 8px 30px;
-  background: rgba(255,255,255,0.8);
-  color: #053777;
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 11px;
-  border: 0;
-  text-shadow: 0 1px 2px #fff;
-  cursor: pointer;
-}
-
-.set-form {
-  max-width: 500px;
-  margin: auto;
-  margin-bottom: 30px;
-}
-.set-form1 {
-  max-width: 500px;
-  margin: auto;
-  margin-bottom: 30px;
-}
-
-.trigger1 {
-  display: block;
-  padding: 18px 16px;
-  width: 100%;
-  font-size: 16px;
-  background-color: rgba(255,255,255,0.2);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: #fff;
-  font-weight: 200;
-  
-  &:focus {
-    outline: 2px solid rgba(255,255,255,0.5);
-    outline: -webkit-focus-ring-color auto 5px;
+  .set-form {
+    max-width: 500px;
+    margin: auto;
+    margin-bottom: 30px;
   }
-}
-.return {
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 12px;
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  text-decoration: none;
-  display: inline-block;
-  background: rgba(0,0,0,0.6);
-  padding: 10px 18px;
-  transition: all 0.3s ease-in-out;
-  opacity: 0.6;
-  
-  &:hover {
-    opacity: 1;
-    background: rgba(0,0,0,0.8);
+  .set-form1 {
+    max-width: 500px;
+    margin: auto;
+    margin-bottom: 30px;
   }
-}
-          .dtbl {
-                width:90%;
-                height:100%;
-                border:2px dashed #69e2f8;
-                border-collapse:collapse;
-                padding:5px;
-            margin:35px auto;
-            overflow:auto;
-            }
-            .dtbl th {
-                border:2px dashed #ff0404;
-                padding:5px;
-                background: #000000;
-                color: #49b40b;
-            }
-            .dtbl td {
-                border:2px dashed #ff0404;
-                padding:5px;
-                background: #130d0d;
-                color: #70fd12;
-                
-            }
+
+  .trigger1 {
+    display: block;
+    padding: 18px 16px;
+    width: 100%;
+    font-size: 16px;
+    background-color: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    font-weight: 200;
+    
+    &:focus {
+      outline: 2px solid rgba(255,255,255,0.5);
+      outline: -webkit-focus-ring-color auto 5px;
+    }
+  }
+  .return {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    text-decoration: none;
+    display: inline-block;
+    background: rgba(0,0,0,0.6);
+    padding: 10px 18px;
+    transition: all 0.3s ease-in-out;
+    opacity: 0.6;
+    
+    &:hover {
+      opacity: 1;
+      background: rgba(0,0,0,0.8);
+    }
+  }
+        
   </style>
-  <script type="text/javascript">
-    var x = document.getElementById('next'); 
-    //alert(x);
-    function playAudio() {
-    x.play(); 
-    } 
-    </script>
+ 
     
 <form action="{{url('/post/')}}" method="post" enctype="multipart/form-data">
   {!! csrf_field() !!}
@@ -220,12 +193,6 @@ button {
   <div class="set-form file-area">
         <label for="images">Picture <span>Choose any resolution but size needs to be below 5MB</span></label>
     <input type="file" accept="image/*" name="pics" id="pics" required="required" multiple="multiple"/>
-
-
-    {{-- <div class="test-file">
-      <div class="done">Uploaded successfully</div>
-      <div class="default">Please select some files</div>
-    </div> --}}
   </div>
 
   <div class="set-form file-area">
@@ -239,49 +206,6 @@ button {
           </div>
             
         </form>
-        
-        {{-- <table class="dtbl">
-          <thead>
-              <tr>
-                  <th>#</th>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th>Cover</th>
-                  <th>Audio</th>
-              </tr>
-          </thead>
-          <tbody>
-              @foreach($post_image as $item)
-              <tr>
-                  <td>{{$loop->iteration}}</td>
-                  <td>{{$item->title}}</td>
-                  <td>{{$item->message}}</td>
-                  <td>
-                      <img src="{{asset($item->pics)}}" width="50" height="50">
-                      </td>
-                      <td>  
-                          <audio controls>
-                          <source src="{{asset($item->audio)}}"> --}}
-                              {{-- <a class="btn btn-primary" id="next" href="/tmp/{{$item->audio}}" onclick="return playAudio();">Play</a> --}}
-                          {{-- </audio> --}}
-                          {{-- <embed src="{{asset($item->audio)}}" height="50" width="250"/> --}}
-                          {{-- <object data="{{asset($item->audio)}}" height="50" width="250">
-                          </object> --}}
-                      {{-- </td>
-              
-              </tr>
-              @endforeach
-              @if ($errors->any())
-                  <div class="alert alert-danger">
-                      <ul>
-                      @foreach ($errors->all() as $error)
-                          <li>{{ $error }}</li>
-                      @endforeach
-                      </ul>
-                  </div>
-              @endif
-          </tbody>
-        </table> --}}
 
 <a href="{{ url('/main')}}" class="return" >Main</a>
 

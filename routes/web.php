@@ -54,12 +54,11 @@ Route::get('/dashboard', function () {
 
 Route::resource("/post", PostImageController::class)->middleware(['auth']);
 Route::resource("/main", PostImageController::class)->middleware(['auth']);
-Route::resource("/index", PostImageController::class)->middleware(['auth']);
-Route::resource("/upload", PostImageController::class)->middleware(['auth']);
 // Route::resource("poster.upload", PostImageController::class)->middleware(['auth']);
-Route::get('/index', function (){
-    return view('poster.index');
-})->middleware(['auth']);;
+Route::get('index', [PostImageController::class,'showup'])->middleware(['auth']);
+// Route::get('/index', function (){
+//     return view('poster.index');
+// })->middleware(['auth']);
 // Route::get('/post',function () {
 //     // auth()->authenticate();
 //      return view('upload');

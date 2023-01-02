@@ -22,8 +22,16 @@ class PostImageController extends Controller
      */
     public function index()
     {
-        $post_image = PostImage::paginate(2);
-        return view('poster.main')->with('post_image',$post_image);
+        // paginate(3)
+        $post_image = PostImage::paginate(3);
+        return view('poster.main',)->with('post_image',$post_image);
+    }
+
+    public function showup()
+    {
+
+        $post_image = PostImage::paginate(3);
+        return view('poster.index',)->with('post_image',$post_image);
     }
 
     /**
@@ -73,9 +81,6 @@ class PostImageController extends Controller
             $audio_url=$u_path.$fullname;
             $store=$areq->move($u_path,$original_name);
             $requestDt['audio'] = $original_name;
-            // $audiopath=url('/storage/upload/files/Audio/'.$filename);
-            // $path=$request->file('audio')->storeAs('public/files/Audio/',$filename);
-            // $all_audios=$audiopath;
            }
         
         $iName = time().'.'.$request->pics->getClientOriginalName();
@@ -85,7 +90,7 @@ class PostImageController extends Controller
 
       $image_name= $req->getClientOriginalName();
       $ext=strtolower($req->getClientOriginalExtension());
-    //   .'.'.$ext
+
       $image_full_name=$image_name;
       $upload_path= 'Images/';
       $image_url=$upload_path.$image_full_name;
@@ -98,13 +103,8 @@ class PostImageController extends Controller
         $requestDt['post_id'] = $user_id;
         $requestDt['user_post_name'] = $user_post_name;
 
-
-        // $requestDt['pics'] = $PATH;
         PostImage::create($requestDt);
-        // $Faudio = $request->file('audio')->getClientOriginalName();
-        // $apath =$request->file('audio')->storeAs('/public/Audio/', $Faudio,'public');
-        // $requestAt['audio'] = '/storage/'.$apath;
-       
+   
         
         return redirect('/post')->with('Alert Message','Posted');
         

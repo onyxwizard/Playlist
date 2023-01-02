@@ -224,20 +224,8 @@
                 background: #130d0d;
                 color: #70fd12;
                 
-            }
-
-            
+            } 
         </style>
-
-
-
-        <script type="text/javascript">
-        var x = document.getElementById('next'); 
-        //alert(x);
-        function playAudio() {
-        x.play(); 
-        } 
-        </script>
             
     </head>
                        
@@ -246,52 +234,19 @@
         <ul class="lt">
             <li class="tt"><a href="{{ url('/') }}">Home</a></li>
             <li class="tt"><a href="{{ route('profile.edit')}}">Profile</a></li>
-            <li class="tt"><a href="{{ url('/post/create')}}">Post</a></li>
+            <li class="tt"><a href="{{ url('/post/create')}}">Upload a Song</a></li>
+            <li class="tt"><a href="{{ url('/index')}}">Browse</a></li>
             <li class="tt" style="float:right"><a class="trigger" href="{{ route('logout') }}"class="ml-4 text-arial text-indigo-800 ">Logout</a></li>
             <li class="st" style="float:right"> Logged In as : {{ Auth::user()->name }}</li>
         </ul>
         </nav>
          <div id="container">
 
-                
-                {{-- {{ __('Profile') }} --}}
-
-            
-        
             <a href="{{ url('/') }}"><h1>Music Albums</h1></a>
-                
-            
-                <!-- section within header for result-->
                 
                 <header>  
                     <h2 >Trending Songs</h2>             
             </header>
-         
-            {{-- <div id="container">
-            
-            <table class="formtable">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Cover</th>
-                    </thead>
-                </thead>
-                <tbody>
-                    @foreach($post_image as $item)
-                    <tr>
-                        <td>{{$loop->iteration}}</td>
-                        <td>{{$item->title}}</td>
-                        <td>{{$item->message}}</td>
-                        <td>
-                            <img src="{{asset($item->pics)}}" width="50" height="50">
-                            </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table> --}}
-
             <table class="dtbl">
                 <thead>
                     <tr>
@@ -312,7 +267,7 @@
                         <td>{{$item->title}}</td>
                         <td>{{$item->message}}</td>
                         <td>
-                            <img src="/Images/{{$item->pics}}" width="50" height="50">
+                            <img src="/Images/{{$item->pics}}" width="100" height="100">
                             </td>
                             <td>  
                                 <audio controls>
@@ -320,12 +275,7 @@
                                 </audio>
                              </td>
                              @if (Auth::check())
-                             {{-- <td> 
-                                
-                                {
-                                    {{ $item->post_id}} 
-                                }
-                            </td> --}}
+                            
                             <td> 
                                 
                                     {{$item->user_post_name}}, ID=> {{ $item->post_id}}
@@ -349,26 +299,8 @@
            
              
             <div id="rt"></div><br>
-                <footer>
-                    {{-- $id = {{$post_image->currentpage()}}; --}}
-                    {{-- <nav aria-label="...">
-                        <div class="pagination">
-                            
-                            <a href="/main?page={{$post_image->currentpage()}}">&laquo;</a>
-                            <a class="active" href="/main?page={{$post_image->perpage()}}">1</a>
-                            {{-- <a href="/main?page=2">2</a>
-                            <a href="page=3">3</a>
-                            <a href="page=4">4</a>
-                            <a href="#">5</a>
-                            <a href="#">6</a> --}}
-                            {{-- <a href="/main?page={{$post_image->lastpage()}}">&raquo;</a>
-                          </div>
-                      </nav> --}}
-                
-                     
+                <footer>              
                         {{$post_image->links()}}
-                      
-                      
                 </footer>
                 </div>
          </div>

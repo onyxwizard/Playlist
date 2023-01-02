@@ -19,8 +19,10 @@ return new class extends Migration
             $table->string('message');
             $table->string('pics',300);
             $table->string('audio',300);
-            $table->integer('post_id');
+            $table->bigInteger('post_id')->unsigned();
             $table->string('user_post_name');
+
+            $table->foreign('post_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

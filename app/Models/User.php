@@ -52,6 +52,6 @@ class User extends Authenticatable
     }
     public function postimage()
     {
-        return $this->HasMany(PostImage::class, 'post_id','id');
+        return $this->hasMany(PostImage::class, 'post_id','id');
     }
 }

@@ -177,7 +177,7 @@
                   <!-- The slideshow -->
                   <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <a href="{{ url('/login') }}">
+                        <a href="{{ url('/index') }}">
                       <img src="https://images.hdqwalls.com/download/cyberpunk-colorful-ai-art-5k-0u-1280x720.jpg" alt="Los Angeles">
                         <div class="text-box">
                             <h2 class="wow slideInRight" data-wow-duration="1s">PASSION - Positive Lounge Chillout Music</h2>
@@ -186,7 +186,7 @@
                     </a>
                     </div>
                     <div class="carousel-item">
-                        <a href="{{ url('/login') }}">
+                        <a href="{{ url('/index') }}">
                       <img src="https://images.hdqwalls.com/download/abstract-color-wind-5b-1280x720.jpg" alt="Chicago">
                       
                     <div class="text-box">
@@ -195,7 +195,7 @@
                     </a>
                     </div>
                     <div class="carousel-item">
-                        <a href="{{ url('/login') }}">
+                        <a href="{{ url('/index') }}">
                       <img src="https://images.hdqwalls.com/download/abstract-bangles-4k-7c-1280x720.jpg" alt="New York">
                     <div class="text-box">
                             <h2 class="wow fadeInUp" data-wow-duration="1s">Lo-Fi Chill Music - Lofi Music for Work / Study / Relax</h2>
@@ -205,7 +205,7 @@
                     </div>
 
                     <div class="carousel-item">
-                        <a href="{{ url('/login') }}">
+                        <a href="{{ url('/index') }}">
                       <img src="https://images.hdqwalls.com/download/lightning-abstract-art-4k-4v-1280x720.jpg" alt="York">
                     <div class="text-box">
                             <h2 class="wow fadeInUp" data-wow-duration="1s">HAPPY LUCKY JOYFUL MUSIC | Background Uplifting Music for Positive Mood and Inspiration</h2>
@@ -228,10 +228,10 @@
                 </section>
 
             </header>
-                <div id="rt"></div><br>
+                {{-- <div id="rt"></div><br>
                 <footer>
                     <p><center><strong>COPYRIGHTS RESERVED 2023 |  AK</strong></center></p>
                 </footer>
-                </div>
+                </div> --}}
     </body>
 </html>
