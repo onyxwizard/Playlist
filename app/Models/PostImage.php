@@ -12,8 +12,8 @@ class PostImage extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['title','message','pics','audio','post_id','user_post_name'];
 
-    // public function users()
-    // {
-    //     return $this->belongsTo(User::class, 'post_id','id');
-    // }
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'post_id','id');
+    }
 }

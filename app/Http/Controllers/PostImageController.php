@@ -58,33 +58,56 @@ class PostImageController extends Controller
                         ->withInput();
         }
 
+
+
         $requestDt = $request->all();
-        $fName = time().$request->file('pics')->getClientOriginalName();
-        // $imagepath=url('/storage/upload/files/Images/'.$fName,'public');
-        // $destinationPath = public_path().'/Images/' ;
-        $requestDt['pics'] = $request->file('pics')->storeAs('/',$fName,'public');
+        
+        if($request->hasFile('audio')){
+            $areq = $request->file('audio');
+            $uniqueid=uniqid();
+            $original_name=$areq->getClientOriginalName();
+            $size=$areq->getSize();
+            $extension=$areq->getClientOriginalExtension();
+            $fullname=Carbon::now()->format('Ymd').'_'.$uniqueid.'.'.$extension;
+            $u_path= 'Audio/';
+            $audio_url=$u_path.$fullname;
+            $store=$areq->move($u_path,$original_name);
+            $requestDt['audio'] = $original_name;
+            // $audiopath=url('/storage/upload/files/Audio/'.$filename);
+            // $path=$request->file('audio')->storeAs('public/files/Audio/',$filename);
+            // $all_audios=$audiopath;
+           }
+        
+        $iName = time().'.'.$request->pics->getClientOriginalName();
+       
+        
+        $req = $request->file('pics');
+
+      $image_name= $req->getClientOriginalName();
+      $ext=strtolower($req->getClientOriginalExtension());
+    //   .'.'.$ext
+      $image_full_name=$image_name;
+      $upload_path= 'Images/';
+      $image_url=$upload_path.$image_full_name;
+      $success=$req->move($upload_path,$image_full_name);
+      $dt['pics']=$image_full_name;
+      $requestDt['pics'] = $image_full_name;
+  
         $user_id = Auth::user()->getId();
         $user_post_name = Auth::user()->getName();
         $requestDt['post_id'] = $user_id;
         $requestDt['user_post_name'] = $user_post_name;
+
 
         // $requestDt['pics'] = $PATH;
         PostImage::create($requestDt);
         // $Faudio = $request->file('audio')->getClientOriginalName();
         // $apath =$request->file('audio')->storeAs('/public/Audio/', $Faudio,'public');
         // $requestAt['audio'] = '/storage/'.$apath;
-        if($request->hasFile('audio')){
-            $uniqueid=uniqid();
-            $original_name=$request->file('audio')->getClientOriginalName();
-            $size=$request->file('audio')->getSize();
-            $extension=$request->file('audio')->getClientOriginalExtension();
-            $filename=Carbon::now()->format('Ymd').'_'.$uniqueid.'.'.$extension;
-            $audiopath=url('/storage/upload/files/Audio/'.$filename);
-            $path=$request->file('audio')->storeAs('public/files/Audio/',$filename);
-            $all_audios=$audiopath;
-           }
+       
         
-        return redirect('/post')->with('flash_message','Posted');
+        return redirect('/post')->with('Alert Message','Posted');
+        
     }
 
     /**

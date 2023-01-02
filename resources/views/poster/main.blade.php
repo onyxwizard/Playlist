@@ -299,7 +299,7 @@
                         <th>Title</th>
                         <th>Description</th>
                         <th>Cover</th>
-                        {{-- <th>Audio</th> --}}
+                        <th>Audio</th>
                         {{-- <th>Posted By</th> --}}
                         <th>Posted Author</th>
                     </tr>
@@ -312,15 +312,13 @@
                         <td>{{$item->title}}</td>
                         <td>{{$item->message}}</td>
                         <td>
-                            <img src="{{asset($item->pics)}}" width="50" height="50">
+                            <img src="/Images/{{$item->pics}}" width="50" height="50">
                             </td>
-                            {{-- <td>  
+                            <td>  
                                 <audio controls>
-                                <source src="{{asset($item->audio)}}">
-                                    <a class="btn btn-primary" id="next" href="/tmp/{{$item->audio}}" onclick="return playAudio();">Play</a>
-                                </audio> 
-                                
-                             </td> --}}
+                                    <source src="/Audio/{{($item->audio)}}" type="audio/mpeg">
+                                </audio>
+                             </td>
                              @if (Auth::check())
                              {{-- <td> 
                                 
@@ -367,9 +365,9 @@
                           </div>
                       </nav> --}}
                 
-                      <span class="foot">
+                     
                         {{$post_image->links()}}
-                      </span>
+                      
                       
                 </footer>
                 </div>
