@@ -267,10 +267,10 @@
                     @foreach($post_image as $item)
                     <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td><a href="{{ url('/index')}}">{{$item->title}}</a></td>
-                        <td><a href="{{ url('/index')}}">{{$item->message}}</a></td>
+                        <td><a href="{{ url('/index?page=')}}.{{$loop->iteration}}">{{$item->title}}</a></td>
+                        <td><a href="{{ url('/index?page=')}}.{{$loop->iteration}}">{{$item->message}}</a></td>
                         <td>
-                            <a href="{{ url('/index')}}"> <img src="/Images/{{$item->pics}}" width="100" height="100"/></a>
+                            <a href="{{ url('/index?page=')}}.{{$loop->iteration}}"> <img src="/Images/{{$item->pics}}" width="100" height="100"/></a>
                             </td>
                             <td>  
                                 <audio controls>
@@ -302,9 +302,9 @@
            
              
             <div id="rt"></div><br>
-                <footer>              
+                {{-- <footer>              
                         {{$post_image->links()}}
-                </footer>
+                </footer> --}}
                 </div>
          </div>
     </body>

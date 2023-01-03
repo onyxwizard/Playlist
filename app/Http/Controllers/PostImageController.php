@@ -24,7 +24,7 @@ class PostImageController extends Controller
     public function index()
     {
         // paginate(3)
-        $post_image = PostImage::paginate(2);
+        $post_image = PostImage::all();
         return view('poster.main',)->with('post_image',$post_image);
     }
 
