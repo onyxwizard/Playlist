@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Pagination\Paginator;
 class PostImageController extends Controller
 {
     /**
@@ -23,14 +24,15 @@ class PostImageController extends Controller
     public function index()
     {
         // paginate(3)
-        $post_image = PostImage::paginate(3);
+        $post_image = PostImage::paginate(2);
         return view('poster.main',)->with('post_image',$post_image);
     }
 
     public function showup()
     {
+        Paginator::useBootstrap();
 
-        $post_image = PostImage::paginate(3);
+        $post_image = PostImage::simplePaginate(1);
         return view('poster.index',)->with('post_image',$post_image);
     }
 

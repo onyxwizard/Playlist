@@ -9,4 +9,5 @@ class WebPageIndex extends Controller
     public function Index(){
         return view("title.home");
     }
+    
 }

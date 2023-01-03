@@ -70,11 +70,10 @@
 
 
             footer{
-                text-align:right;
+                text-align:center;
                 border:rgb(255, 1, 1) dashed 1.9px;
-                color:#00ff00;
+                color:#0e0f16;
                 padding:5px;
-            
                 
             }
             
@@ -108,7 +107,7 @@
             
 
             #results span{
-                color:white;
+                color:rgb(255, 8, 8);
                 font-weight:bold;
             }
             
@@ -151,7 +150,8 @@
             background-color: rgb(255, 7, 7);
             }
             .st{
-                color: white;
+                color: rgb(252, 42, 5);
+                padding: 0px 50px;
                
             }
 
@@ -223,6 +223,7 @@
                 padding:5px;
                 background: #130d0d;
                 color: #70fd12;
+                text-align: center;
                 
             } 
         </style>
@@ -236,7 +237,9 @@
             <li class="tt"><a href="{{ route('profile.edit')}}">Profile</a></li>
             <li class="tt"><a href="{{ url('/post/create')}}">Upload a Song</a></li>
             <li class="tt"><a href="{{ url('/index')}}">Browse</a></li>
+            <li class="tt"><a href="{{ url('/api')}}">Locate IP</a></li>
             <li class="tt" style="float:right"><a class="trigger" href="{{ route('logout') }}"class="ml-4 text-arial text-indigo-800 ">Logout</a></li>
+            <br>
             <li class="st" style="float:right"> Logged In as : {{ Auth::user()->name }}</li>
         </ul>
         </nav>
@@ -255,8 +258,8 @@
                         <th>Description</th>
                         <th>Cover</th>
                         <th>Audio</th>
-                        {{-- <th>Posted By</th> --}}
                         <th>Posted Author</th>
+                        <th>Author ID</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -264,10 +267,10 @@
                     @foreach($post_image as $item)
                     <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td>{{$item->title}}</td>
-                        <td>{{$item->message}}</td>
+                        <td><a href="{{ url('/index')}}">{{$item->title}}</a></td>
+                        <td><a href="{{ url('/index')}}">{{$item->message}}</a></td>
                         <td>
-                            <img src="/Images/{{$item->pics}}" width="100" height="100">
+                            <a href="{{ url('/index')}}"> <img src="/Images/{{$item->pics}}" width="100" height="100"/></a>
                             </td>
                             <td>  
                                 <audio controls>
@@ -276,13 +279,13 @@
                              </td>
                              @if (Auth::check())
                             
-                            <td> 
-                                
-                                    {{$item->user_post_name}}, ID=> {{ $item->post_id}}
-                                
-                             @endif
+                            <td>                             
+                                    {{$item->user_post_name}} 
                             </td>
-                    
+                            <td>
+                                {{ $item->post_id}}
+                            </td>
+                             @endif
                     </tr>
                     @endforeach
                     @if ($errors->any())
