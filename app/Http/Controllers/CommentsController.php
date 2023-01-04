@@ -6,8 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\Comments;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use App\File;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\URL;
+use Carbon\Carbon;
+use Illuminate\Pagination\Paginator;
 class CommentsController extends Controller
 {
+  
     public function store(Request $request){
         if(Auth::check()){
             $validator = Validator::make($request->all(), [

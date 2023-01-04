@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
+use App\Http\Controllers\CommentsController;
+use App\Models\Comments;
 class PostImageController extends Controller
 {
     /**
@@ -25,15 +27,16 @@ class PostImageController extends Controller
     {
         // paginate(3)
         $post_image = PostImage::all();
-        return view('poster.main',)->with('post_image',$post_image);
+        return view('poster.main')->with('post_image',$post_image);
     }
 
     public function showup()
     {
         Paginator::useBootstrap();
 
+        $comments = Comments::all();
         $post_image = PostImage::simplePaginate(1);
-        return view('poster.index',)->with('post_image',$post_image);
+        return view('poster.index',)->with('post_image',$post_image)->with('comments',$comments);;
     }
 
     /**

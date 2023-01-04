@@ -239,6 +239,9 @@
                 color: rgb(0, 195, 255);
                 text-shadow: 2px 2px 5px rgb(255, 9, 9);
             }
+            .sec{
+                color: white;
+            }
                     
         </style>
         <body>
@@ -359,7 +362,7 @@
                                   <span class="c-badge">{{$it->user_comment_name}}</span>
                                   
                                 </div>
-                                <small>{{$it->created}}</small>
+                                <small class="sec">Commented On {{$it->created_at}}</small>
                           </div>
     
                           <p class="text-justify comment-text mb-0">{{$it->cbody}}</p>
