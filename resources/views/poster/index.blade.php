@@ -235,6 +235,10 @@
             .para{
                 text-align:inherit;
             }
+            .errors{
+                color: rgb(0, 195, 255);
+                text-shadow: 2px 2px 5px rgb(255, 9, 9);
+            }
                     
         </style>
         <body>
@@ -249,6 +253,7 @@
                         <li class="st" style="float:right"> Logged In as : {{ Auth::user()->name }}</li>
                     </ul>
                     </nav>
+                   
                     <br>
                     
                 <div class="ct">
@@ -291,7 +296,7 @@
                     </span>
                 </footer>
 
-        <!- Here goes the Commenting for Each Post-->
+        <!-- Here goes the Commenting for Each Post-->
             {{-- <div id="csection">
                 <h4> Comment Section </h4>
                 <form action = "{{url('comments')}}" method="POST">
@@ -304,8 +309,9 @@
                 <br>
 
 
-           
-                    
+           <!-- To check Role -->
+                {{-- @if(Auth::user()->getId() === 1)
+                @endif --}}
         
 
             <div class="container mt-5 mb-5">
@@ -321,12 +327,19 @@
                         <h1>Comments</h1>
                         
                       </div>
-    
+                      
+                      <div class="errors">
+                        @if(session('Note'))
+                            <h5>** {{session('Note')}} **</h5>
+                            @endif
+                        </div>
                       <div class="mt-3 d-flex flex-row align-items-center p-3 form-color">
+
                         <form action = "{{url('comments')}}" method="POST">
                             @csrf
-                            <input type="hidden" name="post_slug" value="fun">
-                            <textarea class="form-control" placeholder="Enter your comment..." name="comment_bdy" rows="6" required></textarea>
+                            <input type="hidden" name="cpost_id" id="cpost_id" value={{$item->id}}>
+                            <input type="hidden" name="user_name" id="user_name" value={{Auth::user()->name}}>
+                            <textarea class="form-control" placeholder="Enter your comment..." name="comment_bdy" id="comment_bdy" msg cols="30" rows="5" required></textarea>
                             <button type="submit"> Submit </button>
                         </form>    
                       </div>
@@ -342,7 +355,7 @@
     
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex flex-row align-items-center">
-                                  <span class="c-badge">Brian selter</span>
+                                  <span class="c-badge">{{$item->user_post_name}}</span>
                                   
                                 </div>
                                 <small>12h ago</small>

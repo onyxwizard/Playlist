@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostImageController;
 use App\Http\Controllers\ApiControllerIp;
+use App\Http\Controllers\CommentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,14 +38,14 @@ Route::get('logout', function (){
 
 Route::get('/login', function (){
     return view('poster.main');
-})->middleware(['auth']);;
+})->middleware(['auth']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('api', [ApiControllerIp::class, 'index']);
-
+Route::post('comments', [CommentsController::class,'store'])->middleware(['auth']);
 
 Route::resource("/post", PostImageController::class)->middleware(['auth']);
 Route::resource("/main", PostImageController::class)->middleware(['auth']);
