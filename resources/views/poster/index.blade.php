@@ -244,35 +244,39 @@
                 border: #00fff2 2px solid;
                 background-image:linear-gradient(to right, rgba(255, 0, 0, 0), rgb(0, 0, 0));
             }
-                    
+                 
+            .trigger {
+                background-color:  linear-gradient(rgb(241, 16, 8),#111111);
+            }
+
+            .trigger:hover{
+                background-color: #0f0f0f;
+            }
+
         </style>
         <body>
             @if (Auth::check())
             
                 <nav>
                     <ul class="lt">
-                        <li class="tt"><a href="{{ url('/') }}">Home</a></li>
                         <li class="tt"><a href="{{ url('/post/create')}}">Upload a Song</a></li>
-                        <li class="tt" style="float:right"><a class="trigger" href="{{ route('logout') }}"class="ml-4 text-arial text-indigo-800 ">Logout</a></li>
+                        <li class="tt" style="float:right"><a class="trigger" href="{{ url('/main') }}"class="ml-4 text-arial text-indigo-800 ">Return</a></li>
                         <br>
                         <li class="st" style="float:right"> Logged In as : {{ Auth::user()->name }}</li>
                     </ul>
                     </nav>
                    
                     <br>
-                    
+
                 <div class="ct">
                     <div class="table-row">
                      <div class="table-cell">
                         <h4 class="titles">{{$item->title}}</h4>
-                    
                         <img src="/Images/{{$item->pics}}" width="300" height="250"/>
                         <br>
                         <audio controls>
                             <source src="/Audio/{{($item->audio)}}" type="audio/mpeg"width="200" height="200">
-                        </audio>
-    
-                        
+                        </audio>    
                      </div>
                      <div class="table-row">
                       <div class="table-cell2">
@@ -331,9 +335,7 @@
                             <textarea class="form-control" placeholder="Enter your comment..." name="comment_bdy" id="comment_bdy" msg cols="30" rows="5" required></textarea>
                             <button type="submit" id="ajsub"> Submit </button>
                         </form>    
-                      </div>
-    
-                
+                      </div>         
                       @foreach($comments as $it)
                       {{-- {{$loop->iteration}} --}}
                       @if($item->id === $it->cpost_id)
@@ -347,7 +349,7 @@
     
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex flex-row align-items-center">
-                                  <span class="c-badge">{{$it->user_comment_name}}</span>
+                                  <span class="c-badge"><a href="{{url('view/')}}/{{$it->cuser_id}}">{{$it->user_comment_name}}</a></span>
                                 </div>
                                 <small class="sec">Commented On {{$it->created_at}}</small>
                           </div>
@@ -370,13 +372,10 @@
                       </div>
                       @endif
                     @endforeach
-                    </div>
-                    
-                  </div>
-                  
+                    </div>                 
+                  </div>                  
                 </div>
-                </div>
-                
+                </div>                
               </div>
         </body> 
         <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
@@ -426,12 +425,9 @@
                                         alert(resp.message);
                                     }
             }
-
                         });
-
                     }
                 });
             });
         </script>                
-        
 </html>

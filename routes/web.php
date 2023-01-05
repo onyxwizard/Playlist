@@ -52,6 +52,10 @@ Route::resource("/post", PostImageController::class)->middleware(['auth']);
 Route::resource("/main", PostImageController::class)->middleware(['auth']);
 // Route::resource("poster.upload", PostImageController::class)->middleware(['auth']);
 Route::get('index', [PostImageController::class,'showup'])->middleware(['auth']);
+// Route::get('/view', function (){
+//     return view('comment.view');
+// })->middleware(['auth']);
+Route::get('/view/{cmtid}', [PostImageController::class,'viewup'])->middleware(['auth']);
 
 
 

@@ -37,9 +37,16 @@ class PostImageController extends Controller
 
         $comments = Comments::all();
         $post_image = PostImage::simplePaginate(1);
-        return view('poster.index',)->with('post_image',$post_image)->with('comments',$comments);;
+        return view('poster.index')->with('post_image',$post_image)->with('comments',$comments);
     }
 
+    public function viewup($cmtid)
+    {
+
+        $comments = Comments::all();
+        $post_image = PostImage::all();
+        return view('comment.view')->with('post_image',$post_image)->with('comments',$comments)->with('cmtid',$cmtid);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -82,9 +89,9 @@ class PostImageController extends Controller
             $original_name=$areq->getClientOriginalName();
             $size=$areq->getSize();
             $extension=$areq->getClientOriginalExtension();
-            $fullname=Carbon::now()->format('Ymd').'_'.$uniqueid.'.'.$extension;
+            // $fullname=Carbon::now()->format('Ymd').'_'.$uniqueid.'.'.$extension;
             $u_path= 'Audio/';
-            $audio_url=$u_path.$fullname;
+            // $audio_url=$u_path.$fullname;
             $store=$areq->move($u_path,$original_name);
             $requestDt['audio'] = $original_name;
            }

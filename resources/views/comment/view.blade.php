@@ -24,7 +24,8 @@
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
-        <!-- Styles -->
+   
+
         <style>
             html{
                 line-height:1.15;-webkit-text-size-adjust:100%
@@ -77,56 +78,6 @@
                 padding:5px;
                 
             }
-            
-
-            .submit{
-                transition-duration: 0.4s;
-                background-color: white; /* Green */
-                border: none;
-                color: black;
-                padding: 10px 22px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                margin: 4px 2px;
-                transition-duration: 0.4s;
-                cursor: pointer;
-                border: 2px solid #b32d00;
-            }
-
-            .submit:hover {
-                background-color: #fa490e;
-                color: black;
-            }
-
-            #rt h3{
-                background:#b32d00;
-                padding:10px;
-                margin:10px 0;
-            }
-            
-
-            #results span{
-                color:rgb(255, 8, 8);
-                font-weight:bold;
-            }
-            
-            .heading-box  h2{ width:100%; color: red; }
-            .text-box {
-                position: absolute;
-                top: 50%;
-                left: 15%;
-                right: 15%;
-                color: #fff;
-                text-align: center;
-                transform: translateY(-50%);
-            }
-            .text-indigo-800{
-                color: #00ffd5;
-            }
-          
-           
             .lt {
             list-style-type: none;
             margin: 0;
@@ -152,51 +103,18 @@
             }
             .st{
                 color: rgb(252, 42, 5);
-                padding: 0px 50px;
+                padding: 0px 45px;
+                text-align: center;
                
             }
 
             .trigger {
-            background-color: #b700ff;
+                background-color:  linear-gradient(rgb(241, 16, 8),#111111);
             }
 
             .trigger:hover{
-                background-color: #0f0f0f;
+                background-color: #ff0606;
             }
-            .pagination {
-            display: inline-block;
-            }
-
-            .pagination a {
-            color: rgb(245, 233, 233);
-            float: left;
-            padding: 8px 16px;
-            text-decoration: none;
-            border: 1px solid #ddd;
-            margin: 0 4px;
-            transition: background-color .3s;
-            }
-
-            .pagination a.active {
-            background-color: #00ff08;
-            color: white;
-            border: 1px solid #4CAF50;
-            }
-
-            .pagination a:hover:not(.active) {background-color: #ff0000;}
-
-            .pagination a:first-child {
-            border-top-left-radius: 5px;
-            border-bottom-left-radius: 5px;
-            }
-
-            .pagination a:last-child {
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
-            }
-
-          
-            
             table {
             width: 100%;
             }
@@ -230,87 +148,64 @@
         </style>
             
     </head>
-                       
-    <body>
-        <nav>
+    
+    <nav>
         <ul class="lt">
-            <li class="tt"><a href="{{ url('/') }}">Home</a></li>
-            <li class="tt"><a href="{{ route('profile.edit')}}">Profile</a></li>
-            <li class="tt"><a href="{{ url('/post/create')}}">Upload a Song</a></li>
-            <li class="tt"><a href="{{ url('/index')}}">Browse</a></li>
-            <li class="tt"><a href="{{ url('/api')}}">Locate IP</a></li>
-            <li class="tt" style="float:right"><a class="trigger" href="{{ route('logout') }}"class="ml-4 text-arial text-indigo-800 ">Logout</a></li>
+            <li class="tt" style="float:right"><a class="trigger" href="{{ url('/index') }}"class="ml-4 text-arial text-indigo-800 ">Back</a></li>
             <br>
             <li class="st" style="float:right"> Logged In as : {{ Auth::user()->name }}</li>
         </ul>
-        </nav>
-         <div id="container">
+        </nav> 
 
-            <a href="{{ url('/') }}"><h1>Music Albums</h1></a>
+    <table class="dtbl">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Posted By</th>
+                <th>Posts</th>
+                <th>Post ID</th>
                 
-                <header>  
-                    <h2 >Trending Songs</h2>             
-            </header>
-            <table class="dtbl">
+            </tr>
+        </thead>
+        @foreach($post_image as $item)
+        @if($item->post_id == $cmtid)
+        <tbody>
+            <tr>
+                <td>{{$loop->iteration}}</td>
+                <td>{{$item->user_post_name}}</td>
+                <td>
+                    <img src="/Images/{{$item->pics}}" width="100" height="100"/></a>
+                    </td>
+                     @if (Auth::check())
+                    <td>
+                        {{ $item->post_id}}
+                    </td>
+                     @endif
+            </tr>
+            @endif
+            @endforeach
+            
+        </tbody>
+    </table>
+    <table class="dtbl">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Cover</th>
-                        <th>Audio</th>
-                        <th>Posted Author</th>
-                        <th>Author ID</th>
+                        <th>Commeted By</th>
+                        <th>Message</th>
                     </tr>
                 </thead>
+                @foreach($comments as $cmmt)
+                @if($cmmt->cuser_id == $cmtid)
                 <tbody>
-                    
-                    @foreach($post_image as $item)
                     <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td><a href="{{ url('/index?page=')}}.{{$loop->iteration}}">{{$item->title}}</a></td>
-                        <td><a href="{{ url('/index?page=')}}.{{$loop->iteration}}">{{$item->message}}</a></td>
-                        <td>
-                            <a href="{{ url('/index?page=')}}.{{$loop->iteration}}"> <img src="/Images/{{$item->pics}}" width="100" height="100"/></a>
-                            </td>
-                            <td>  
-                                <audio controls>
-                                    <source src="/Audio/{{($item->audio)}}" type="audio/mpeg">
-                                </audio>
-                             </td>
-                             @if (Auth::check())
-                            
-                            <td>                             
-                                    {{$item->user_post_name}} 
-                            </td>
-                            <td>
-                                {{ $item->post_id}}
-                            </td>
-                             @endif
+                        <td>{{$cmmt->user_comment_name}}</td>
+                        <td>{{$cmmt->cbody}}</td>
                     </tr>
-                    @endforeach
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                            </ul>
-                        </div>
                     @endif
-                </tbody>
-            </table>
-           
-             
-            <div id="rt"></div><br>
-                {{-- <footer>              
-                        {{$post_image->links()}}
-                </footer> --}}
+                    @endforeach
+                    </ul>
                 </div>
-         </div>
-    </body>
-   
-</html>
-
-                
-
+        </tbody>
+    </table>
