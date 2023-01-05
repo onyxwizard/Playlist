@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @foreach($post_image as $item)
 <style>
     
@@ -298,24 +299,7 @@
                         {{$post_image->links()}}
                     </span>
                 </footer>
-
-        <!-- Here goes the Commenting for Each Post-->
-            {{-- <div id="csection">
-                <h4> Comment Section </h4>
-                <form action = "{{url('comments')}}" method="POST">
-                    @csrf
-                    <input type="hidden" name="post_slug" value="fun">
-                    <textarea name="comment_bdy" rows="6" required></textarea>
-                    <button type="submit"> Submit </button>
-                </form>
-            </div> --}}
                 <br>
-
-
-           <!-- To check Role -->
-                {{-- @if(Auth::user()->getId() === 1)
-                @endif --}}
-        
 
             <div class="container mt-5 mb-5">
 
@@ -338,17 +322,22 @@
                         </div>
                       <div class="mt-3 d-flex flex-row align-items-center p-3 form-color">
 
-                        <form action = "{{url('comments')}}" method="POST">
-                            @csrf
+                        <form action = "{{url('comments')}}"  id="commentform" method="POST">
+                            {{ csrf_field() }}
                             <input type="hidden" name="cpost_id" id="cpost_id" value={{$item->id}}>
+                            <input type="hidden" name="cuser_id" id="cuser_id" value={{Auth::user()->getId()}}>
                             <input type="hidden" name="user_name" id="user_name" value={{Auth::user()->name}}>
                             <textarea class="form-control" placeholder="Enter your comment..." name="comment_bdy" id="comment_bdy" msg cols="30" rows="5" required></textarea>
-                            <button type="submit"> Submit </button>
+                            <button type="submit" id="ajsub"> Submit </button>
                         </form>    
                       </div>
     
+                      <!-- To check Role -->
+                {{-- @if(Auth::user()->getId() === 1)
+                @endif --}}
                       @foreach($comments as $it)
                       {{$loop->iteration}}
+                      @if($item->id === $it->cpost_id)
                       <div class="mt-2">
     
                         <div class="d-flex flex-row p-3">
@@ -360,22 +349,22 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex flex-row align-items-center">
                                   <span class="c-badge">{{$it->user_comment_name}}</span>
-                                  
                                 </div>
                                 <small class="sec">Commented On {{$it->created_at}}</small>
                           </div>
-    
+                          <br>
                           <p class="text-justify comment-text mb-0">{{$it->cbody}}</p>
     
-                          <div class="d-flex flex-row user-feed">
+                          {{-- <div class="d-flex flex-row user-feed">
     
                             <span class="wish"><i class="fa fa-heartbeat mr-2"></i>24</span>
                             <span class="ml-3"><i class="fa fa-comments-o mr-2"></i>Reply</span>
     
-                          </div>
+                          </div> --}}
                         </div>    
                       </div>
                     </div>
+                    @endif
                     @endforeach
                   </div>
                   
@@ -383,6 +372,26 @@
                 </div>
                 
               </div>
-        </body>                 
+        </body> 
+        <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+            </script>
+        <script>
+             $('#commentform' ).submit(function( e ) {
+            $.ajax( {
+            url: '{{ url('comments')}}',
+            type: 'POST',
+            data: new FormData( this ),
+            processData: false,
+            contentType: false,
+            success: function(result){
+                console.log(result);
+            }
+        } );
+        e.preventDefault();
+    } 
+);
+            
+            
+        </script>                
         
 </html>

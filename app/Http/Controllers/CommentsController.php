@@ -33,6 +33,12 @@ class CommentsController extends Controller
                 'cbody' => $request->comment_bdy
 
             ]);
+            $cmt = new Comments;
+            $cmt->cpost_id = $request->cpost_id;
+            $cmt->cuser_id = $request->cuser_id;
+            $cmt->user_comment_name = $request->user_comment_name;
+            $cmt->cbody = $request->cbody;
+            
             return redirect('/index')->with('Note','Comment posted successfully');
         }
         else{
