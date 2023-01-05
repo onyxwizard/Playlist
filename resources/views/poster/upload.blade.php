@@ -178,7 +178,7 @@
  
     
 <form action="{{url('/post/')}}" method="post" enctype="multipart/form-data">
-  {!! csrf_field() !!}
+  {{ csrf_field() }}
   <h1><strong>Post a Song</strong> => Playlist</h1>
   
   <div class="set-form">

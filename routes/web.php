@@ -41,12 +41,13 @@ Route::get('/login', function (){
 })->middleware(['auth']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect('/main');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('api', [ApiControllerIp::class, 'index']);
 Route::post('comments', [CommentsController::class,'store'])->middleware(['auth']);
 Route::post('deletecmts', [CommentsController::class,'destroy'])->middleware(['auth']);
+Route::post('deletepost', [PostImageController::class,'kill'])->middleware(['auth']);
 
 Route::resource("/post", PostImageController::class)->middleware(['auth']);
 Route::resource("/main", PostImageController::class)->middleware(['auth']);

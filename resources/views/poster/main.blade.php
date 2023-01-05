@@ -9,7 +9,7 @@
         <title>Playlist</title>
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-        
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Theme lib -->
             <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -251,6 +251,7 @@
                 <header>  
                     <h2 >Trending Songs</h2>             
             </header>
+            
             <table class="dtbl">
                 <thead>
                     <tr>
@@ -260,12 +261,13 @@
                         <th>Cover</th>
                         <th>Audio</th>
                         <th>Posted Author</th>
-                        <th>Author ID</th>
+                        <th>Operations</th>
                     </tr>
                 </thead>
                 <tbody>
                     
                     @foreach($post_image as $item)
+                    <div class="displaycomment">
                     <tr>
                         <td>{{$loop->iteration}}</td>
                         <td><a href="{{ url('/index?page=')}}.{{$loop->iteration}}">{{$item->title}}</a></td>
@@ -284,10 +286,14 @@
                                     {{$item->user_post_name}} 
                             </td>
                             <td>
-                                {{ $item->post_id}}
+                                <div>
+                                    {{-- <button type="button"  class=" btn btn-primary btn-lg me-2">Edit</button> --}}
+                                    <button type="button"  value="{{$item->id}}" class=" destroy btn btn-danger btn-lg me-2">Delete</button>
+                                  </div>
                             </td>
                              @endif
                     </tr>
+                </div>
                     @endforeach
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -300,7 +306,7 @@
                     @endif
                 </tbody>
             </table>
-           
+         
              
             <div id="rt"></div><br>
                 {{-- <footer>              
@@ -309,7 +315,39 @@
                 </div>
          </div>
     </body>
-   
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+<script>
+         
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).on('click','.destroy',function(){
+            if(confirm('Confirm Delete your post?')){
+                var press = $(this);
+                var postt_id = press.val();
+                $.ajax({
+                        url: '{{ url('deletepost')}}',
+                        type: 'POST',
+                        data: {
+                            'postt_id' : postt_id
+                        },
+                        success: function(resp){
+                            if(resp.status== 200){
+                                press.closest('.displaycomment').remove();
+                                alert(resp.message);
+                            }else{
+                                alert(resp.message);
+                            }
+    }
+                });
+            }
+        });
+    });
+</script> 
 </html>
 
                 

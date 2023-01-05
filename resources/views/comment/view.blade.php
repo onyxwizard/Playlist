@@ -153,7 +153,7 @@
         <ul class="lt">
             <li class="tt" style="float:right"><a class="trigger" href="{{ url('/index') }}"class="ml-4 text-arial text-indigo-800 ">Back</a></li>
             <br>
-            <li class="st" style="float:right"> Logged In as : {{ Auth::user()->name }}</li>
+            <li class="st" style="float:right"> Logged In as : {{ Auth::user()->name}}</li>
         </ul>
         </nav> 
 

@@ -89,9 +89,9 @@ class PostImageController extends Controller
             $original_name=$areq->getClientOriginalName();
             $size=$areq->getSize();
             $extension=$areq->getClientOriginalExtension();
-            // $fullname=Carbon::now()->format('Ymd').'_'.$uniqueid.'.'.$extension;
+            $fullname=Carbon::now()->format('Ymd').'_'.$uniqueid.'.'.$extension;
             $u_path= 'Audio/';
-            // $audio_url=$u_path.$fullname;
+            $audio_url=$u_path.$fullname;
             $store=$areq->move($u_path,$original_name);
             $requestDt['audio'] = $original_name;
            }
@@ -163,8 +163,31 @@ class PostImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        if(Auth::check()){
+            $dpost = PostImage::where('id',$request->postt_id)->where('user_post_name',Auth::user()->name)->first();
+            $dpost->delete();
+
+         return response()->json(['status' => 200,'message' => 'Post Deleted']);
+        
+        }
+        else{
+            return response()->json(['status' => 401,'message' => 'Need to Login']);
+        }
+    }
+
+    public function kill(Request $request)
+    {
+        if(Auth::check()){
+            $dpost = PostImage::where('id',$request->postt_id)->where('user_post_name',Auth::user()->name)->first();
+            $dpost->delete();
+
+         return response()->json(['status' => 200,'message' => 'Post Deleted']);
+        
+        }
+        else{
+            return response()->json(['status' => 401,'message' => 'Need to Login']);
+        }
     }
 }

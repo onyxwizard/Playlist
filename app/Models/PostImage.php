@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Comments;
 class PostImage extends Model
 {
     use HasFactory;
@@ -15,5 +16,10 @@ class PostImage extends Model
     public function Users()
     {
         return $this->belongsTo(User::class, 'post_id','id');
+    }
+
+    public function CommentPost()
+    {
+        return $this->hasOne(Comments::class, 'post_id','cpost_id');
     }
 }
