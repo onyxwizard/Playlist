@@ -46,6 +46,7 @@ Route::get('/dashboard', function () {
 
 Route::get('api', [ApiControllerIp::class, 'index']);
 Route::post('comments', [CommentsController::class,'store'])->middleware(['auth']);
+Route::post('deletecmts', [CommentsController::class,'destroy'])->middleware(['auth']);
 
 Route::resource("/post", PostImageController::class)->middleware(['auth']);
 Route::resource("/main", PostImageController::class)->middleware(['auth']);

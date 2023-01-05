@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
 use App\Http\Controllers\CommentsController;
 use App\Models\Comments;
+use Datatables;
 class PostImageController extends Controller
 {
     /**

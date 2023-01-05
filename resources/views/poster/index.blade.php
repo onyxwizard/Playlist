@@ -10,7 +10,7 @@
 <style>
     
        body{
-        background:#1f1e1e;
+        background:#000000;
         font-size:16px;
          height:auto;
          background-image: linear-gradient(rgba(14, 13, 13, 0.712),#000000);
@@ -165,10 +165,7 @@
                 color:#fff;
             }
 
-            .wish{
-
-                color:#35b69f;
-            }
+          
 
 
             .user-feed{
@@ -243,6 +240,10 @@
             .sec{
                 color: white;
             }
+            .mt-2{
+                border: #00fff2 2px solid;
+                background-image:linear-gradient(to right, rgba(255, 0, 0, 0), rgb(0, 0, 0));
+            }
                     
         </style>
         <body>
@@ -299,7 +300,7 @@
                         {{$post_image->links()}}
                     </span>
                 </footer>
-                <br>
+                
 
             <div class="container mt-5 mb-5">
 
@@ -332,13 +333,11 @@
                         </form>    
                       </div>
     
-                      <!-- To check Role -->
-                {{-- @if(Auth::user()->getId() === 1)
-                @endif --}}
+                
                       @foreach($comments as $it)
-                      {{$loop->iteration}}
+                      {{-- {{$loop->iteration}} --}}
                       @if($item->id === $it->cpost_id)
-                      <div class="mt-2">
+                      <div class="mt-2 displaycomment">
     
                         <div class="d-flex flex-row p-3">
     
@@ -354,18 +353,25 @@
                           </div>
                           <br>
                           <p class="text-justify comment-text mb-0">{{$it->cbody}}</p>
-    
-                          {{-- <div class="d-flex flex-row user-feed">
-    
-                            <span class="wish"><i class="fa fa-heartbeat mr-2"></i>24</span>
-                            <span class="ml-3"><i class="fa fa-comments-o mr-2"></i>Reply</span>
-    
-                          </div> --}}
+                          </div>
+                                <!-- To check Role -->
+                        @if(Auth::user()->getId() === 1)
+                          <div>
+                            {{-- <a herf="" class="btn btn-primary btn-sm me-2" >Edit</a> --}}
+                            <button type="button" value="{{$it->id}}" class=" destroy btn btn-danger btn-sm me-2">Delete</button>
+                          </div>
+                          @elseif (Auth::user()->getId() === $it->cuser_id)
+                          <div>
+                            {{-- <a herf="" class="btn btn-primary btn-sm me-2" >Edit</a> --}}
+                            <button type="button" value="{{$it->id}}" class=" destroy btn btn-danger btn-sm me-2">Delete</button>
+                          </div>
+                          @endif
                         </div>    
                       </div>
-                    </div>
-                    @endif
+                      @endif
                     @endforeach
+                    </div>
+                    
                   </div>
                   
                 </div>
@@ -377,6 +383,11 @@
             </script>
         <script>
              $('#commentform' ).submit(function( e ) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
             $.ajax( {
             url: '{{ url('comments')}}',
             type: 'POST',
@@ -391,7 +402,36 @@
     } 
 );
             
-            
+            $(document).ready(function() {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $(document).on('click','.destroy',function(){
+                    if(confirm('Confirm Delete comment?')){
+                        var press = $(this);
+                        var cmmt_id = press.val();
+                        $.ajax({
+                                url: '{{ url('deletecmts')}}',
+                                type: 'POST',
+                                data: {
+                                    'cmmt_id' : cmmt_id
+                                },
+                                success: function(resp){
+                                    if(resp.status== 200){
+                                        press.closest('.displaycomment').remove();
+                                        alert(resp.message);
+                                    }else{
+                                        alert(resp.message);
+                                    }
+            }
+
+                        });
+
+                    }
+                });
+            });
         </script>                
         
 </html>

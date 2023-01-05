@@ -45,4 +45,17 @@ class CommentsController extends Controller
             redirect()->back()->with('Note','Login is Needed');
         }
     }
+
+    public function destroy(Request $request){
+        if(Auth::check()){
+            $dcomt = Comments::where('id',$request->cmmt_id)->where('cuser_id',Auth::user()->getId())->first();
+            $dcomt->delete();
+
+         return response()->json(['status' => 200,'message' => 'Comment Deleted']);
+        
+        }
+        else{
+            return response()->json(['status' => 401,'message' => 'Need to Login']);
+        }
+    }
 }
