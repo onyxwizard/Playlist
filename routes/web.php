@@ -61,7 +61,8 @@ Route::get('/view/{cmtid}', [PostImageController::class,'viewup'])->middleware([
 Route::get('/editpost/{id}', [PostImageController::class,'edit'])->middleware(['auth']);
 Route::put('/updatepost/{id}', [PostImageController::class,'update'])->middleware(['auth']);
 
-
+Route::get('/editcomment/{id}', [CommentsController::class,'edit'])->middleware(['auth']);
+Route::put('/updatecomments/{id}', [CommentsController::class,'update'])->middleware(['auth']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

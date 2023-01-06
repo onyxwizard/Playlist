@@ -46,6 +46,20 @@ class CommentsController extends Controller
         }
     }
 
+    public function edit($id)
+    {
+        $edit = Comments::find($id);
+        return view('comment.edit',compact('edit'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $updates = Comments::find($id);
+        $updates->cbody = $request->input('comment_bdy');
+        $updates->update();
+        return redirect('/index')->with('message','Updated');
+    }
+
     public function destroy(Request $request){
         if(Auth::check()){
             $dcomt = Comments::where('id',$request->cmmt_id)->where('cuser_id',Auth::user()->getId())->first();

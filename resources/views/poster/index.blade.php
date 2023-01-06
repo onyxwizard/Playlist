@@ -364,12 +364,12 @@
                                 <!-- To check Role -->
                         @if(Auth::user()->getId() === 1)
                           <div>
-                            {{-- <a herf="" class="btn btn-primary btn-sm me-2" >Edit</a> --}}
+                            <a href="{{ url('/editcomment/')}}/{{$it->id}}" class="btn btn-primary btn-lg me-2">Edit</a>
                             <button type="button" value="{{$it->id}}" class=" destroy btn btn-danger btn-sm me-2">Delete</button>
                           </div>
                           @elseif (Auth::user()->getId() === $it->cuser_id)
                           <div>
-                            {{-- <a herf="" class="btn btn-primary btn-sm me-2" >Edit</a> --}}
+                            <a href="{{ url('/editcomment/')}}/{{$it->id}}" class="btn btn-primary btn-lg me-2">Edit</a>
                             <button type="button" value="{{$it->id}}" class=" destroy btn btn-danger btn-sm me-2">Delete</button>
                           </div>
                           @else
