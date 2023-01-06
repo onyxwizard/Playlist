@@ -7,16 +7,18 @@ use App\Models\PostImage;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use App\File;
+// use App\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
 use Illuminate\Pagination\Paginator;
 use App\Http\Controllers\CommentsController;
 use App\Models\Comments;
 use Datatables;
+use Illuminate\Support\Facades\Input;
 class PostImageController extends Controller
 {
     /**
@@ -37,7 +39,13 @@ class PostImageController extends Controller
 
         $comments = Comments::all();
         $post_image = PostImage::simplePaginate(1);
-        return view('poster.index')->with('post_image',$post_image)->with('comments',$comments);
+        if(!$post_image->isEmpty()){
+            return view('poster.index')->with('post_image',$post_image)->with('comments',$comments);
+        }else{
+            return redirect('/main')->with('post_image',$post_image)->with('message','No Post and Comments to Display');
+        }
+
+        
     }
 
     public function viewup($cmtid)
@@ -119,7 +127,7 @@ class PostImageController extends Controller
         PostImage::create($requestDt);
    
         
-        return redirect('/post')->with('Alert Message','Posted');
+        return redirect('/post')->with('Message','Posted');
         
     }
 
@@ -142,7 +150,8 @@ class PostImageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $edit = PostImage::find($id);
+        return view('poster.edit',compact('edit'));
     }
 
     /**
@@ -154,7 +163,47 @@ class PostImageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $updates = PostImage::find($id);
+        $updates->title = $request->input('title');
+        $updates->message = $request->input('message');
+        
+        if($request->hasFile('pics'))
+        {
+            $dst = 'Images/'.$updates->pics;
+            if(File::exists($dst)){
+                File::delete($dst);
+            }
+        $req = $request->file('pics');
+
+        $image_name= $req->getClientOriginalName();
+        $ext=strtolower($req->getClientOriginalExtension());
+
+        $image_full_name=$image_name;
+        $upload_path= 'Images/';
+        $image_url=$upload_path.$image_full_name;
+        $success=$req->move($upload_path,$image_full_name);
+        $dt['pics']=$image_full_name;
+        $updates->pics = $image_full_name;
+        }
+
+        if($request->hasFile('audio')){
+            $dst = 'Audio/'.$updates->audio;
+                if(File::exists($dst)){
+                    File::delete($dst);
+                }
+            $file = $request->file('audio');
+            $uniqueid=uniqid();
+            $original_name=$file->getClientOriginalName();
+            $size=$file->getSize();
+            $extension=$file->getClientOriginalExtension();
+            $fullname=Carbon::now()->format('Ymd').'_'.$uniqueid.'.'.$extension;
+            $u_path= 'Audio/';
+            $audio_url=$u_path.$fullname;
+            $updates['audio']=$file->move($u_path,$original_name);
+            $updates->audio = $original_name;
+           }
+        $updates->update();
+        return redirect('/main')->with('message','Updated');
     }
 
     /**
@@ -177,17 +226,5 @@ class PostImageController extends Controller
         }
     }
 
-    public function kill(Request $request)
-    {
-        if(Auth::check()){
-            $dpost = PostImage::where('id',$request->postt_id)->where('user_post_name',Auth::user()->name)->first();
-            $dpost->delete();
-
-         return response()->json(['status' => 200,'message' => 'Post Deleted']);
-        
-        }
-        else{
-            return response()->json(['status' => 401,'message' => 'Need to Login']);
-        }
-    }
+    
 }

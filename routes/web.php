@@ -47,7 +47,7 @@ Route::get('/dashboard', function () {
 Route::get('api', [ApiControllerIp::class, 'index']);
 Route::post('comments', [CommentsController::class,'store'])->middleware(['auth']);
 Route::post('deletecmts', [CommentsController::class,'destroy'])->middleware(['auth']);
-Route::post('deletepost', [PostImageController::class,'kill'])->middleware(['auth']);
+Route::post('deletepost', [PostImageController::class,'destroy'])->middleware(['auth']);
 
 Route::resource("/post", PostImageController::class)->middleware(['auth']);
 Route::resource("/main", PostImageController::class)->middleware(['auth']);
@@ -57,6 +57,9 @@ Route::get('index', [PostImageController::class,'showup'])->middleware(['auth'])
 //     return view('comment.view');
 // })->middleware(['auth']);
 Route::get('/view/{cmtid}', [PostImageController::class,'viewup'])->middleware(['auth']);
+
+Route::get('/editpost/{id}', [PostImageController::class,'edit'])->middleware(['auth']);
+Route::put('/updatepost/{id}', [PostImageController::class,'update'])->middleware(['auth']);
 
 
 

@@ -227,6 +227,11 @@
                 text-align: center;
                 
             } 
+            .errors, h5{
+                color: rgb(0, 195, 255);
+                text-shadow: 2px 2px 5px rgb(255, 9, 9);
+                font-size: 25px;
+            }
         </style>
             
     </head>
@@ -244,6 +249,7 @@
             <li class="st" style="float:right"> Logged In as : {{ Auth::user()->name }}</li>
         </ul>
         </nav>
+        
          <div id="container">
 
             <a href="{{ url('/') }}"><h1>Music Albums</h1></a>
@@ -251,7 +257,11 @@
                 <header>  
                     <h2 >Trending Songs</h2>             
             </header>
-            
+            <div class="errors">
+                @if(session('message'))
+                    <h5>** {{session('message')}} **</h5>
+                    @endif
+                </div>
             <table class="dtbl">
                 <thead>
                     <tr>
@@ -270,10 +280,10 @@
                     <div class="displaycomment">
                     <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td><a href="{{ url('/index?page=')}}.{{$loop->iteration}}">{{$item->title}}</a></td>
-                        <td><a href="{{ url('/index?page=')}}.{{$loop->iteration}}">{{$item->message}}</a></td>
+                        <td><a href="{{ url('/index?page=')}}{{$loop->iteration}}">{{$item->title}}</a></td>
+                        <td><a href="{{ url('/index?page=')}}{{$loop->iteration}}">{{$item->message}}</a></td>
                         <td>
-                            <a href="{{ url('/index?page=')}}.{{$loop->iteration}}"> <img src="/Images/{{$item->pics}}" width="100" height="100"/></a>
+                            <a href="{{ url('/index?page=')}}{{$loop->iteration}}"> <img src="/Images/{{$item->pics}}" width="100" height="100"/></a>
                             </td>
                             <td>  
                                 <audio controls>
@@ -286,10 +296,20 @@
                                     {{$item->user_post_name}} 
                             </td>
                             <td>
-                                <div>
-                                    {{-- <button type="button"  class=" btn btn-primary btn-lg me-2">Edit</button> --}}
+                                @if(Auth::user()->getId() === 1)
+                                  <div>
+                                    <a href="{{ url('/editpost/')}}/{{$item->id}}" class="btn btn-primary btn-lg me-2">Edit</a>
                                     <button type="button"  value="{{$item->id}}" class=" destroy btn btn-danger btn-lg me-2">Delete</button>
                                   </div>
+                                @elseif (Auth::user()->getId() === $item->post_id)
+                                <div>
+                                    <a href="{{ url('/editpost/')}}/{{$item->id}}" class="btn btn-primary btn-lg me-2">Edit</a>
+                                    <button type="button"  value="{{$item->id}}" class=" destroy btn btn-danger btn-lg me-2">Delete</button>
+                                  </div>
+                                  @else
+                                  <h4 style="font-size: 20px"> No Operations Permitted</h4>
+                                @endif
+                                 
                             </td>
                              @endif
                     </tr>

@@ -23,7 +23,7 @@ class CommentsController extends Controller
                 'cbody' => 'string'
             ]);
             if($validator->fails()){ 
-                return redirect()->back()->with('Note','Comment body is required');
+                return redirect()->back()->with('message','Comment body is required');
             }
 
             Comments::create([
@@ -39,10 +39,10 @@ class CommentsController extends Controller
             $cmt->user_comment_name = $request->user_comment_name;
             $cmt->cbody = $request->cbody;
             
-            return redirect('/index')->with('Note','Comment posted successfully');
+            return redirect('/index')->with('message','Comment posted successfully');
         }
         else{
-            redirect()->back()->with('Note','Login is Needed');
+            redirect()->back()->with('message','Login is Needed');
         }
     }
 
