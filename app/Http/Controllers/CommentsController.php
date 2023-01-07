@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\URL;
 use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
+use App\Notifications\PopUps;
 class CommentsController extends Controller
 {
   
@@ -38,7 +39,10 @@ class CommentsController extends Controller
             $cmt->cuser_id = $request->cuser_id;
             $cmt->user_comment_name = $request->user_comment_name;
             $cmt->cbody = $request->cbody;
-            
+             $thd = Comments::all();
+             
+             Users::all()->notify(new PopUps($thd));
+            // User::find($request->cuser_id)->notify(new PopUps($thd));
             return redirect('/index')->with('message','Comment posted successfully');
         }
         else{

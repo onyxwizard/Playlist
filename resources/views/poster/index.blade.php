@@ -260,6 +260,7 @@
 
         </style>
         <body>
+            
             @if (Auth::check())
             
                 <nav>

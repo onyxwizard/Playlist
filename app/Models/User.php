@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\PostImage;
+use App\Models\Comments;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -53,5 +55,9 @@ class User extends Authenticatable
     public function postimage()
     {
         return $this->hasMany(PostImage::class, 'post_id','id');
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comments::class, 'cpost_id','id');
     }
 }

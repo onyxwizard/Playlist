@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('user_comment_name');
             
             $table->foreign('cpost_id')->references('post_id')->on('post_image')->onDelete('cascade')->onUpdate('cascade');
+            
             $table->timestamps();
 
         });

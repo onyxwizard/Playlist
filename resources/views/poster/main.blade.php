@@ -10,6 +10,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script src=”https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js”></script>
+
 
         <!-- Theme lib -->
             <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -152,7 +154,7 @@
             }
             .st{
                 color: rgb(252, 42, 5);
-                padding: 0px 50px;
+                padding: 0px 45px;
                
             }
 
@@ -232,6 +234,55 @@
                 text-shadow: 2px 2px 5px rgb(255, 9, 9);
                 font-size: 25px;
             }
+            .dropbtn {
+                color: rgb(0, 195, 255);
+                text-shadow: 2px 2px 5px rgb(255, 9, 9);
+                padding: 9px;
+                font-size: 16px;
+                border: none;
+                cursor: pointer;
+                background-image: linear-gradient(black,#b30000);
+                }
+
+                /* The container <div> - needed to position the dropdown content */
+                .dropdown {
+                position: relative;
+                display: inline-block;
+                }
+
+                /* Dropdown Content (Hidden by Default) */
+                .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+                }
+
+                /* Links inside the dropdown */
+                .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                }
+
+                /* Change color of dropdown links on hover */
+                .dropdown-content a:hover {background-color: #f1f1f1}
+
+                /* Show the dropdown menu on hover */
+                .dropdown:hover .dropdown-content {
+                display: block;
+                }
+
+                /* Change the background color of the dropdown button when the dropdown content is shown */
+                .dropdown:hover .dropbtn {
+                background-color: #3e8e41;
+                }
+                .uolst{
+                    list-style-type: none;
+                }
         </style>
             
     </head>
@@ -247,9 +298,21 @@
             <li class="tt" style="float:right"><a class="trigger" href="{{ route('logout') }}"class="ml-4 text-arial text-indigo-800 ">Logout</a></li>
             <br>
             <li class="st" style="float:right"> Logged In as : {{ Auth::user()->name }}</li>
+            <br>
         </ul>
-        </nav>
-        
+        <div class="dropdown">
+            <button class="dropbtn glyphicon glyphicon-globe">Notifications<span class="badge">{{count(auth()->user()->unreadnotifications)}}</span></button>
+            <div class="dropdown-content">
+                
+                <li class="uolst">
+                @foreach(auth()->user()->unreadnotifications as $notification)
+                {{-- @include('layouts.no'.class_basename($notification->type)) --}}
+                <a href="#">{{$notification->data['user']['name']}} Commented on Post ID:{{$notification->data['set']['0']['cpost_id']}} </a>
+                @endforeach
+                </li>
+            </div>
+          </div>
+    
          <div id="container">
 
             <a href="{{ url('/') }}"><h1>Music Albums</h1></a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PostImage;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -36,10 +37,12 @@ class PostImageController extends Controller
     public function showup()
     {
         Paginator::useBootstrap();
-
+        $thd = Comments::all();
+            $users = $thd->get('cpost_id');
         $comments = Comments::all();
         $post_image = PostImage::simplePaginate(1);
         if(!$post_image->isEmpty()){
+            // User::find($users)->notify(new PopUps($thd));
             return view('poster.index')->with('post_image',$post_image)->with('comments',$comments);
         }else{
             return redirect('/main')->with('post_image',$post_image)->with('message','No Post and Comments to Display');
