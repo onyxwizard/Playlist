@@ -71,10 +71,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+Route::get('/readpost', function(){
+    auth()->user()->unreadnotifications->markasRead();
+});
 Route::get('/test', function(){
-    $thd = Comments::all();
-    dd($thd);
+$thd = Comments::all();
+    dd($thd[0]->cuser_id);
     
 
 });

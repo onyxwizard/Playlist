@@ -39,11 +39,11 @@ class CommentsController extends Controller
             $cmt->cuser_id = $request->cuser_id;
             $cmt->user_comment_name = $request->user_comment_name;
             $cmt->cbody = $request->cbody;
-             $thd = Comments::all();
-             
-             Users::all()->notify(new PopUps($thd));
+            // $thd = Comments::all();
+            $cmt->User->notify(new PopUps($cmt));
             // User::find($request->cuser_id)->notify(new PopUps($thd));
             return redirect('/index')->with('message','Comment posted successfully');
+            
         }
         else{
             redirect()->back()->with('message','Login is Needed');

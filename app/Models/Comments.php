@@ -15,9 +15,9 @@ class Comments extends Model
 
     public function PostComment()
     {
-        return $this->belongsTo(PostImage::class, 'post_id','cpost_id');
+        return $this->belongsTo(PostImage::class, 'post_id','cuser_id');
     }
-    public function user()
+    public function User()
     {
         return $this->belongsTo(User::class,  'cpost_id','id');
     }

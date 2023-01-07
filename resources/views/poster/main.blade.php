@@ -304,10 +304,10 @@
             <button class="dropbtn glyphicon glyphicon-globe">Notifications<span class="badge">{{count(auth()->user()->unreadnotifications)}}</span></button>
             <div class="dropdown-content">
                 
-                <li class="uolst">
+                <li class="uolst" id="markasRead" onclick="readno()">
                 @foreach(auth()->user()->unreadnotifications as $notification)
-                {{-- @include('layouts.no'.class_basename($notification->type)) --}}
-                <a href="#">{{$notification->data['user']['name']}} Commented on Post ID:{{$notification->data['set']['0']['cpost_id']}} </a>
+                @include('layouts.notifications.'.class_basename($notification->type))
+                {{-- <a href="#">{{$notification->data['user']['name']}} Commented on Post ID:{{$notification->data['set']['0']['cpost_id']}} </a> --}}
                 @endforeach
                 </li>
             </div>
@@ -398,8 +398,8 @@
                 </div>
          </div>
     </body>
-    <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    </script>
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src ="{{asset('js/main.js')}}"></script>
 <script>
          
     $(document).ready(function() {
@@ -431,6 +431,8 @@
         });
     });
 </script> 
+
+    
 </html>
 
                 

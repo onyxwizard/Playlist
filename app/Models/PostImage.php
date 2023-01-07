@@ -20,6 +20,6 @@ class PostImage extends Model
 
     public function CommentPost()
     {
-        return $this->hasOne(Comments::class, 'post_id','cpost_id');
+        return $this->hasMany(Comments::class, 'post_id','cuser_id');
     }
 }

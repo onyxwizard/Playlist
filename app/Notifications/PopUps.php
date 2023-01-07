@@ -14,16 +14,16 @@ class PopUps extends Notification
 
     
 
-    protected $thd;
+    protected $cmt;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($thd)
+    public function __construct($cmt)
     {
         //
-        $this->thd = $thd;
+        $this->cmt = $cmt;
        
     }
 
@@ -48,8 +48,9 @@ class PopUps extends Notification
     {
        
         return [
-            'set'=> $this->thd,
-            'user'=>$notifiable
+            'set'=> $this->cmt,
+            // 'user'=>$notifiable
+            'user' => auth()->user()
         ];
     }
 
