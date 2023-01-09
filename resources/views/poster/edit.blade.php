@@ -210,4 +210,12 @@
 
 <a href="{{ url('/main')}}" class="return" >Main</a>
 
+
+
+
+
+
+
+
+
 </html>

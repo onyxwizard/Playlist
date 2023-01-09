@@ -98,7 +98,9 @@
             <h2>My Public IP</h2>
             
             <br>
-            <h3>{{$req}}</h3>
+            @foreach($req as $lk)
+            <h3>{{$lk}}</h3>
+            @endforeach
            
             </header>
         </div>

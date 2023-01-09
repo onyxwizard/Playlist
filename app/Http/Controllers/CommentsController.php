@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Comments;
 use Illuminate\Support\Facades\Validator;
@@ -17,7 +15,6 @@ use Illuminate\Pagination\Paginator;
 use App\Notifications\PopUps;
 class CommentsController extends Controller
 {
-  
     public function store(Request $request){
         if(Auth::check()){
             $validator = Validator::make($request->all(), [
@@ -26,24 +23,19 @@ class CommentsController extends Controller
             if($validator->fails()){ 
                 return redirect()->back()->with('message','Comment body is required');
             }
-
             Comments::create([
                 'cpost_id' =>$request->cpost_id,
                 'cuser_id' => Auth::user()->getId(),
                 'user_comment_name' => $request->user_name,
                 'cbody' => $request->comment_bdy
-
             ]);
             $cmt = new Comments;
             $cmt->cpost_id = $request->cpost_id;
             $cmt->cuser_id = $request->cuser_id;
             $cmt->user_comment_name = $request->user_comment_name;
             $cmt->cbody = $request->cbody;
-            // $thd = Comments::all();
             $cmt->User->notify(new PopUps($cmt));
-            // User::find($request->cuser_id)->notify(new PopUps($thd));
-            return redirect('/index')->with('message','Comment posted successfully');
-            
+            return redirect('/index')->with('message','Comment posted successfully');  
         }
         else{
             redirect()->back()->with('message','Login is Needed');

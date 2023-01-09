@@ -7,6 +7,7 @@ use App\Http\Controllers\ApiControllerIp;
 use App\Http\Controllers\CommentsController;
 use App\Models\Comments;
 use App\Models\User;
+use App\ApiServiceProviderClass;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,9 +27,7 @@ Route::get('/logout',function () {
     return view('welcome');
 });
 
-
 Route::get('/home',function () {
-    // auth()->authenticate();
     return view('welcome');
 })->middleware(['auth','verified']);
 
@@ -46,20 +45,26 @@ Route::get('/dashboard', function () {
     return redirect('/main');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('api', [ApiControllerIp::class, 'index']);
+app()->bind('apifunction',function(){
+    return new \App\ApiServiceProviderClass();
+});
+Route::get('/api', function(ApiServiceProviderClass $req) {
+    $req->apicall();
+    
+    // $apireq =  $apifunction->returns();
+    return view('api')->with('req',$req->apicall());
+});
+
+
+// Route::get('api', [ApiControllerIp::class, 'index']);
 Route::post('comments', [CommentsController::class,'store'])->middleware(['auth']);
 Route::post('deletecmts', [CommentsController::class,'destroy'])->middleware(['auth']);
-Route::post('deletepost', [PostImageController::class,'destroy'])->middleware(['auth']);
 
+Route::post('deletepost', [PostImageController::class,'destroy'])->middleware(['auth']);
 Route::resource("/post", PostImageController::class)->middleware(['auth']);
 Route::resource("/main", PostImageController::class)->middleware(['auth']);
-// Route::resource("poster.upload", PostImageController::class)->middleware(['auth']);
 Route::get('index', [PostImageController::class,'showup'])->middleware(['auth']);
-// Route::get('/view', function (){
-//     return view('comment.view');
-// })->middleware(['auth']);
-Route::get('/view/{cmtid}', [PostImageController::class,'viewup'])->middleware(['auth']);
-
+Route::get('/view/{cmtid}', [PostImageController::class,'show'])->middleware(['auth']);
 Route::get('/editpost/{id}', [PostImageController::class,'edit'])->middleware(['auth']);
 Route::put('/updatepost/{id}', [PostImageController::class,'update'])->middleware(['auth']);
 
@@ -73,12 +78,7 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/readpost', function(){
     auth()->user()->unreadnotifications->markasRead();
-});
-Route::get('/test', function(){
-$thd = Comments::all();
-    dd($thd[0]->cuser_id);
-    
+})->middleware(['auth']);
 
-});
 
 require __DIR__.'/auth.php';

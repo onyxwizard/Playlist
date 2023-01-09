@@ -307,7 +307,7 @@
                 <li class="uolst" id="markasRead" onclick="readno()">
                 @foreach(auth()->user()->unreadnotifications as $notification)
                 @include('layouts.notifications.'.class_basename($notification->type))
-                {{-- <a href="#">{{$notification->data['user']['name']}} Commented on Post ID:{{$notification->data['set']['0']['cpost_id']}} </a> --}}
+               
                 @endforeach
                 </li>
             </div>
