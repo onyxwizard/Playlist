@@ -153,7 +153,7 @@
             background-color: rgb(255, 7, 7);
             }
             .st{
-                color: rgb(252, 42, 5);
+                color: rgb(5, 252, 252);
                 padding: 0px 45px;
                
             }
